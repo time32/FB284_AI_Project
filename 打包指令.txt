@@ -1,0 +1,1 @@
+pyinstaller -F -w -i "svg_code_to_png.ico" --add-data "svg_code_to_png.ico;." --name "Epos_Calculator_Pro" FB284calculate_AI.py
