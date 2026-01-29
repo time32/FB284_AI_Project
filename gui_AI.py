@@ -3,12 +3,12 @@ from tkinter import ttk, messagebox
 import sys
 import os
 import math
+import subprocess
 
 # --- 引入 PIL 库用于图片缩放 (需 pip install pillow) ---
 try:
     from PIL import Image, ImageTk
 except ImportError:
-    # 简单的 fallback，但这会影响图片查看功能
     Image = None
     ImageTk = None
 
@@ -51,6 +51,82 @@ THEME = {
     "red_highlight": "#ff6666",    # 红色高亮文字
     "hover_row":     "#4b5263"     # 鼠标悬停行背景
 }
+
+# --- 报文数据定义 (新增) ---
+# --- 报文数据定义 ---
+TELEGRAM_DATA = {
+    "1": {
+        "title": "标准 1 号报文",
+        "info": {
+            "type": "标准 1 号报文", "mode": "速度控制模式", "class": "AC1",
+            "qty_out": "2", "qty_in": "2"
+        },
+        "data": [
+            ("PZD1", "STW1", "控制字 1", "ZSW1", "状态字 1"),
+            ("PZD2", "NSOLL_A", "转速设定值 A (16 位)", "NIST_A", "转速实际值 A (16 位)")
+        ]
+    },
+    "3": {
+        "title": "标准 3 号报文",
+        "info": {
+            "type": "标准 3 号报文", "mode": "速度控制模式", "class": "AC1, AC4",
+            "qty_out": "5", "qty_in": "9"
+        },
+        # data 仅存储简单行，复杂布局在 draw_3_layout 中硬编码
+        "data": [] 
+    },
+    "102": {
+        "title": "西门子 102 报文",
+        "info": {
+            "type": "西门子 102 报文", "mode": "速度控制模式", "class": "AC1, AC4",
+            "qty_out": "6", "qty_in": "10"
+        },
+        "data": [] # 复杂布局在 draw_102_layout 中硬编码
+    },
+    "105": {
+        "title": "西门子 105 报文",
+        "info": {
+            "type": "西门子 105 报文", "mode": "位置控制模式", "class": "AC4",
+            "qty_out": "10", "qty_in": "10"
+        },
+        "data": [] # 复杂布局在 draw_105_layout 中硬编码
+    },
+    "111": {
+        "title": "西门子 111 报文",
+        "info": {
+            "type": "西门子 111 报文", "mode": "位置控制模式", "class": "AC3",
+            "qty_out": "12", "qty_in": "12"
+        },
+        "data": [
+            ("PZD1",  "STW1", "控制字 1", "ZSW1", "状态字 1"),
+            ("PZD2",  "POS_STW1", "定位控制字 1", "POS_ZSW1", "定位状态字 1"),
+            ("PZD3",  "POS_STW2", "定位控制字 2", "POS_ZSW2", "定位状态字 2"),
+            ("PZD4",  "STW2", "控制字 2", "ZSW2", "状态字 2"),
+            ("PZD5",  "OVERRIDE", "位置速度倍率", "MELDW", "消息字"),
+            ("PZD6-7","MDI_TARPOS", "MDI 位置 (32位)", "XIST_A", "位置实际值 A"),
+            ("PZD8-9","MDI_VELOCITY", "MDI 速度 (32位)", "NIST_B", "转速实际值 B (32位)"),
+            ("PZD10", "MDI_ACC", "MDI 加速度倍率", "FAULT_CODE", "故障代码"),
+            ("PZD11", "MDI_DEC", "MDI 减速度倍率", "WARN_CODE", "警告代码"),
+            ("PZD12", "自由配置", "调试软件自由配置\n(输入 PZD2)", "自由配置", "通过调试软件自由配置\n(PZD 输出 1)")
+        ]
+    },
+    "352": {
+        "title": "西门子 352 报文",
+        "info": {
+            "type": "西门子 352 报文", "mode": "速度控制模式", "class": "AC1",
+            "qty_out": "6", "qty_in": "6"
+        },
+        "data": [
+            ("PZD1", "STW1", "控制字 1", "ZSW1", "状态字 1"),
+            ("PZD2", "NSOLL_A", "转速设定值 A (16 位)", "NIST_A_GLATT", "转速实际值"),
+            ("PZD3", "自由配置", "通过调试软件自由配置\n(输入 PZD3)", "IAIST_GLATT", "电流实际值"),
+            ("PZD4", "自由配置", "通过调试软件自由配置\n(输入 PZD4)", "MIST_GLATT", "转矩实际值"),
+            ("PZD5", "自由配置", "通过调试软件自由配置\n(输入 PZD5)", "WARN_CODE", "警告代码"),
+            ("PZD6", "自由配置", "通过调试软件自由配置\n(输入 PZD6)", "FAULT_CODE", "故障代码")
+        ]
+    }
+}
+
 
 # --- 模式表格数据定义 ---
 MODE_TABLE_DATA = {
@@ -310,7 +386,7 @@ class RoundedPill(tk.Canvas):
         else:
             self.itemconfig(self.bg_shape, fill=THEME["pill_off_bg"])
 
-# --- 全新自定义暗色滚动条 ---
+# --- 自定义暗色滚动条 ---
 class DarkScrollbar(tk.Canvas):
     def __init__(self, parent, command=None, width=14, bg_color=THEME["scroll_bg"], thumb_color=THEME["scroll_thumb"], hover_color=THEME["scroll_hover"], **kwargs):
         super().__init__(parent, width=width, bg=bg_color, highlightthickness=0, **kwargs)
@@ -410,7 +486,7 @@ class BitRow(tk.Frame):
                 child.configure(bg=color)
 
 class PanelColumn(tk.Frame):
-    def __init__(self, parent, title, var, texts, icon="⚡", show_compare_btn=True, entry_width=70):
+    def __init__(self, parent, title, var, texts, icon="⚡", show_compare_btn=True, entry_width=110):
         super().__init__(parent, bg=THEME["bg_panel"], highlightbackground=THEME["border"], highlightthickness=1)
         self.var = var
         self.texts = texts 
@@ -429,16 +505,8 @@ class PanelColumn(tk.Frame):
         tk.Label(left_box, text=icon, font=("Segoe UI", 11), fg=THEME["title_fg"], bg=THEME["bg_header"]).pack(side="left", padx=(0, 6))
         tk.Label(left_box, text=title, font=("Microsoft YaHei UI", 10, "bold"), fg=THEME["title_fg"], bg=THEME["bg_header"]).pack(side="left")
         
-        if show_compare_btn:
-            btn_wrapper = tk.Frame(h_container, bg=THEME["bg_header"])
-            btn_wrapper.pack(side="right", pady=7)
-            self.btn_compare = RoundedButton(btn_wrapper, text="+", command=self.open_compare_window, 
-                                             width=26, height=26, corner_radius=13, font_size=12,
-                                             bg_normal='#EBCB8B', bg_hover='#D0B075', outer_bg=THEME["bg_header"])
-            self.btn_compare.pack()
-
         input_wrapper = tk.Frame(h_container, bg=THEME["bg_header"])
-        input_wrapper.pack(side="left", padx=(15, 0), pady=7)
+        input_wrapper.pack(side="right", padx=(0, 0), pady=7)
         self.rounded_entry = RoundedEntry(input_wrapper, textvariable=var, width=entry_width, height=26)
         self.rounded_entry.pack(side="left")
         
@@ -477,6 +545,16 @@ class PanelColumn(tk.Frame):
                 row.pack(fill="x", pady=0)
                 bit_idx += 1
             row_display_idx += 1
+
+        if show_compare_btn:
+            footer_frame = tk.Frame(self, bg=THEME["bg_panel"])
+            footer_frame.pack(side="bottom", fill="x", pady=(10, 15)) 
+
+            self.btn_compare = RoundedButton(footer_frame, text="+", command=self.open_compare_window, 
+                                             width=30, height=30, corner_radius=15, font_size=14,
+                                             bg_normal='#EBCB8B', bg_hover='#D0B075', 
+                                             outer_bg=THEME["bg_panel"])
+            self.btn_compare.pack(side="right", padx=15)
 
         self._trace_id = self.var.trace_add("write", self.on_typing)
         self.bind("<Destroy>", self.on_destroy)
@@ -549,12 +627,11 @@ class PanelColumn(tk.Frame):
             bit_val = (val >> row.shift) & row.mask
             row.set_state(bit_val)
 
-# --- 简单图片查看器 (Zoom/Pan) ---
 class ImagePopup(tk.Toplevel):
     def __init__(self, parent, image_path, title="图片查看"):
         super().__init__(parent)
         self.title(title)
-        self.withdraw() # 先隐藏
+        self.withdraw()
         
         self.configure(bg=THEME["bg_window"])
         set_window_icon(self)
@@ -566,30 +643,21 @@ class ImagePopup(tk.Toplevel):
             self.destroy()
             return
 
-        # --- [核心修改] 智能计算初始缩放比例 ---
         sw = self.winfo_screenwidth()
         sh = self.winfo_screenheight()
-        
         img_w, img_h = self.original_image.size
-        
-        # 预留屏幕边距 (例如 100px)
         max_w = sw - 100
         max_h = sh - 100
-        
-        # 计算适应屏幕的缩放比例 (保持长宽比)
-        # 如果图片比屏幕小，保持 1.0；如果大，则缩小以适应屏幕
         scale = 1.0
         if img_w > max_w or img_h > max_h:
             scale = min(max_w / img_w, max_h / img_h)
             
-        self.imscale = scale  # 应用计算出的比例
+        self.imscale = scale
         self.delta = 1.3
         self.image_id = None
         
-        # 计算窗口大小
         win_w = int(img_w * scale)
         win_h = int(img_h * scale)
-        # ------------------------------------
         
         self.canvas = tk.Canvas(self, bg=THEME["bg_window"], highlightthickness=0)
         self.canvas.pack(fill="both", expand=True)
@@ -602,93 +670,202 @@ class ImagePopup(tk.Toplevel):
         
         self.show_image()
         
-        # 屏幕居中
         x = (sw - win_w) // 2
         y = (sh - win_h) // 2
         self.geometry(f"{win_w}x{win_h}+{x}+{y}")
         self.deiconify()
 
-
     def show_image(self, event=None):
         if not self.original_image: return
         new_w = int(self.original_image.width * self.imscale)
         new_h = int(self.original_image.height * self.imscale)
-        
         try:
             resized = self.original_image.resize((new_w, new_h), Image.Resampling.LANCZOS)
             self.tk_image = ImageTk.PhotoImage(resized)
-            
             if self.image_id:
                 self.canvas.itemconfig(self.image_id, image=self.tk_image)
             else:
                 self.image_id = self.canvas.create_image(0, 0, image=self.tk_image, anchor="nw")
-            
             self.canvas.config(scrollregion=self.canvas.bbox("all"))
         except Exception:
             pass
 
-
-
     def on_move_from(self, event):
         self.canvas.scan_mark(event.x, event.y)
-
     def on_move_to(self, event):
         self.canvas.scan_dragto(event.x, event.y, gain=1)
-
     def on_wheel(self, event):
         if event.num == 5 or event.delta < 0:
             self.imscale /= self.delta
         if event.num == 4 or event.delta > 0:
             self.imscale *= self.delta
-            
         if self.imscale < 0.1: self.imscale = 0.1
         if self.imscale > 10.0: self.imscale = 10.0
-        
         self.show_image()
 
 class CompareWindow(tk.Toplevel):
     def __init__(self, parent, title, texts, icon):
         super().__init__(parent)
         self.withdraw()
-        self.title(f"对比模式 - {title}")
+        self.base_title = title
+        self.texts = texts
+        self.icon_symbol = icon
+        self.max_columns = 5
+        self.min_columns = 2
+        self.panels = [] 
+        
+        self.title(f"{title}")
         set_window_icon(self)
         self.configure(bg=THEME["bg_window"])
         
-        w, h = 600, 540
-        sw = self.winfo_screenwidth()
-        sh = self.winfo_screenheight()
-        self.geometry(f"{w}x{h}+{(sw-w)//2}+{(sh-h)//2}")
+        self.main_container = tk.Frame(self, bg=THEME["bg_window"])
+        self.main_container.pack(fill="both", expand=True, padx=10, pady=10)
+        
+        self.columns_frame = tk.Frame(self.main_container, bg=THEME["bg_window"])
+        self.columns_frame.pack(side="top", fill="both", expand=True)
 
-        self.var_a = tk.StringVar(value="0")
-        self.var_b = tk.StringVar(value="0")
+        self.footer_frame = tk.Frame(self.main_container, bg=THEME["bg_window"], height=45)
+        self.footer_frame.pack(side="bottom", fill="x", pady=(10, 0))
+
+        # --- 1. 定义颜色配置 ---
+        self.add_colors = {
+            "normal": '#EBCB8B',   # 金色
+            "hover": '#D0B075'
+        }
+        self.remove_colors = {
+            "normal": THEME["input_err"], # 红色
+            "hover": "#ff6666"
+        }
+        self.disabled_color = "#4b5263"   # 灰色 (禁用)
+
+        # --- 2. 创建按钮 ---
+        # [+] 增加列按钮
+        self.btn_add = RoundedButton(
+            self.footer_frame, 
+            text="+", 
+            command=self.add_column, 
+            width=30, height=30, corner_radius=15, 
+            font_size=14,
+            bg_normal=self.add_colors["normal"], 
+            bg_hover=self.add_colors["hover"], 
+            fg_color='#2E3440',
+            outer_bg=THEME["bg_window"]
+        )
+        self.btn_add.pack(side="right", padx=(5, 0)) 
+
+        # [-] 减少列按钮
+        self.btn_remove = RoundedButton(
+            self.footer_frame, 
+            text="−", 
+            command=self.remove_column, 
+            width=30, height=30, corner_radius=15, 
+            font_size=14,
+            bg_normal=self.remove_colors["normal"], 
+            bg_hover=self.remove_colors["hover"], 
+            fg_color='#ffffff',
+            outer_bg=THEME["bg_window"]
+        )
+        self.btn_remove.pack(side="right", padx=(0, 5)) 
         
-        container = tk.Frame(self, bg=THEME["bg_window"])
-        container.pack(fill="both", expand=True, padx=10, pady=10)
+        # 初始化默认添加两列 (A 和 B)
+        self.add_column() 
+        self.add_column() 
         
-        self.panel_a = PanelColumn(container, f"{title} (A)", self.var_a, texts, icon, show_compare_btn=False, entry_width=70)
-        self.panel_a.pack(side="left", fill="both", expand=True, padx=(0, 5))
+        # --- 3. [关键修复] 强制刷新按钮状态 ---
+        # 必须在显示前调用一次，确保2列时减号按钮的内部属性被设为灰色
+        self.update_button_visuals()
         
-        self.panel_b = PanelColumn(container, f"{title} (B)", self.var_b, texts, icon, show_compare_btn=False, entry_width=70)
-        self.panel_b.pack(side="left", fill="both", expand=True, padx=(5, 0))
-        
-        self.var_a.trace_add("write", self.check_diff)
-        self.var_b.trace_add("write", self.check_diff)
         self.deiconify()
 
-    def check_diff(self, *args):
-        val_a = self.panel_a.parse_value(self.var_a.get()) or 0
-        val_b = self.panel_b.parse_value(self.var_b.get()) or 0
+    def add_column(self):
+        if len(self.panels) >= self.max_columns:
+            return
+        col_char = chr(ord('A') + len(self.panels))
+        col_title = f"{self.base_title} ({col_char})"
+        var = tk.StringVar(value="0")
+        var.trace_add("write", self.check_diff)
+        panel = PanelColumn(self.columns_frame, col_title, var, self.texts, self.icon_symbol, show_compare_btn=False, entry_width=110)
+        panel.pack(side="left", fill="both", expand=True, padx=5)
+        self.panels.append(panel)
+        self.refresh_ui_state()
+
+    def remove_column(self):
+        if len(self.panels) <= self.min_columns:
+            return
+        panel = self.panels.pop()
+        panel.destroy()
+        self.refresh_ui_state()
+
+    def refresh_ui_state(self):
+        self.resize_window()
+        self.check_diff()
+        self.update_button_visuals()
+
+    def update_button_visuals(self):
+        """
+        根据当前列数动态修改按钮颜色。
+        [核心修复逻辑]：
+        直接修改 btn.bg_normal 和 btn.bg_hover 属性。
+        这样即使鼠标触发了 <Enter> 事件，组件内部读取到的 hover 颜色也是灰色的，
+        从而彻底防止颜色跳变。
+        """
+        count = len(self.panels)
         
-        for i in range(len(self.panel_a.rows)):
-            row_a = self.panel_a.rows[i]
-            row_b = self.panel_b.rows[i]
-            
-            val_row_a = (val_a >> row_a.shift) & row_a.mask
-            val_row_b = (val_b >> row_b.shift) & row_b.mask
-            
-            is_diff = (val_row_a != val_row_b)
-            row_a.set_highlight(is_diff)
-            row_b.set_highlight(is_diff)
+        # --- 处理 [+] 按钮状态 ---
+        if count >= self.max_columns:
+            # 禁用：属性全改灰
+            self.btn_add.bg_normal = self.disabled_color
+            self.btn_add.bg_hover = self.disabled_color
+            self.btn_add.itemconfig(self.btn_add.rect_id, fill=self.disabled_color)
+        else:
+            # 启用：恢复金色配置
+            self.btn_add.bg_normal = self.add_colors["normal"]
+            self.btn_add.bg_hover = self.add_colors["hover"]
+            self.btn_add.itemconfig(self.btn_add.rect_id, fill=self.add_colors["normal"])
+
+        # --- 处理 [-] 按钮状态 ---
+        if count <= self.min_columns:
+            # 禁用：属性全改灰
+            self.btn_remove.bg_normal = self.disabled_color
+            self.btn_remove.bg_hover = self.disabled_color
+            self.btn_remove.itemconfig(self.btn_remove.rect_id, fill=self.disabled_color)
+        else:
+            # 启用：恢复红色配置
+            self.btn_remove.bg_normal = self.remove_colors["normal"]
+            self.btn_remove.bg_hover = self.remove_colors["hover"]
+            self.btn_remove.itemconfig(self.btn_remove.rect_id, fill=self.remove_colors["normal"])
+
+    def resize_window(self):
+        col_width = 320 
+        padding = 40
+        total_width = (len(self.panels) * col_width) + padding
+        sw = self.winfo_screenwidth()
+        total_width = min(total_width, sw - 50)
+        h = 600
+        sh = self.winfo_screenheight()
+        x = (sw - total_width) // 2
+        y = (sh - h) // 2
+        self.geometry(f"{total_width}x{h}+{x}+{y}")
+
+    def check_diff(self, *args):
+        if not self.panels: return
+        current_vals = []
+        for p in self.panels:
+            val = p.parse_value(p.var.get())
+            current_vals.append(val if val is not None else 0)
+        if not self.panels[0].rows: return
+        row_count = len(self.panels[0].rows)
+        for r_i in range(row_count):
+            bit_vals = []
+            row_objs = [] 
+            for col_idx, p in enumerate(self.panels):
+                row_obj = p.rows[r_i]
+                row_objs.append(row_obj)
+                val = (current_vals[col_idx] >> row_obj.shift) & row_obj.mask
+                bit_vals.append(val)
+            is_diff = len(set(bit_vals)) > 1
+            for row_obj in row_objs:
+                row_obj.set_highlight(is_diff)
 
 class SelectionWindow(tk.Toplevel):
     def __init__(self, parent, configs, current_selection, on_confirm):
@@ -701,7 +878,7 @@ class SelectionWindow(tk.Toplevel):
         self.configs = configs
         self.max_selection = 4
 
-        w, h = 300, 450
+        w, h = 300, 550
         sw = self.winfo_screenwidth()
         sh = self.winfo_screenheight()
         self.geometry(f"{w}x{h}+{(sw-w)//2}+{(sh-h)//2}")
@@ -746,7 +923,6 @@ class SelectionWindow(tk.Toplevel):
         self.on_confirm(new_selection)
         self.destroy()
 
-# --- 精美小字体版结果窗口 ---
 class ModeResultWindow(tk.Toplevel):
     def __init__(self, parent, mode_id):
         super().__init__(parent)
@@ -790,7 +966,7 @@ class ModeResultWindow(tk.Toplevel):
         tk.Label(header_frame, text=title, font=("Microsoft YaHei UI", 14, "bold"), 
                  fg=THEME["title_fg"], bg=THEME["bg_window"]).pack(anchor="w")
         
-        tk.Label(header_frame, text="根据Excel逻辑表生成的控制位变化预览 (带*项已置顶)", 
+        tk.Label(header_frame, text="下表展示了所选控制模式下各控制字的逻辑含义及变化情况。", 
                  font=("Microsoft YaHei UI", 9), 
                  fg=THEME["text_dim"], bg=THEME["bg_window"]).pack(anchor="w")
 
@@ -846,11 +1022,72 @@ class ModeResultWindow(tk.Toplevel):
                 tags.append("hover_row")
                 self.tree.item(item_id, tags=tags)
 
+class StateDiagramSelectionWindow(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.withdraw()
+        self.title("状态机视图选择")
+        set_window_icon(self)
+        self.configure(bg=THEME["bg_window"])
+        
+        self.diagrams = [
+            ("通用状态图 (General State Diagram)", "General State Diagram.PNG"),
+            ("定位模式状态图 (Positioning Mode)", "State_diagram_of_the_Positioning_Mode.PNG"),
+            ("位置反馈接口状态图 (Position Feedback Interface)", "State diagram of the position feedback interfacewith designations of the states and transitions.svg")
+        ]
+
+        btn_height = 45 
+        win_h = 100 + (len(self.diagrams) * btn_height)
+        w = 480 
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        self.geometry(f"{w}x{win_h}+{(sw-w)//2}+{(sh-win_h)//2}")
+        self.resizable(False, False)
+
+        container = tk.Frame(self, bg=THEME["bg_window"])
+        container.pack(fill="both", expand=True, padx=20, pady=20)
+
+        tk.Label(container, text="请选择要查看的状态图", 
+                 font=("Microsoft YaHei UI", 11, "bold"), fg=THEME["title_fg"], bg=THEME["bg_window"]).pack(pady=(0, 15))
+
+        for name, filename in self.diagrams:
+            cmd = lambda f=filename: self.open_image(f)
+            btn = RoundedButton(container, text=name, command=cmd,
+                                width=440, height=35, corner_radius=8,
+                                bg_normal=THEME["pill_on_bg"], bg_hover="#36bd55",
+                                fg_color="white", outer_bg=THEME["bg_window"], font_size=9)
+            btn.pack(pady=4)
+        self.deiconify()
+
+    def open_image(self, filename):
+        self.destroy()
+        try:
+            img_path = resource_path(filename)
+            if not os.path.exists(img_path):
+                messagebox.showerror("文件缺失", f"未找到文件：\n{filename}\n请确保文件在程序运行目录下。")
+                return
+            if filename.lower().endswith(".svg"):
+                if sys.platform == "win32":
+                    os.startfile(img_path)
+                elif sys.platform == "darwin":
+                    import subprocess
+                    subprocess.call(["open", img_path])
+                else:
+                    import subprocess
+                    subprocess.call(["xdg-open", img_path])
+            else:
+                if Image:
+                    ImagePopup(self.master, img_path, title=filename)
+                else:
+                    messagebox.showwarning("依赖缺失", "查看 PNG 图片需要安装 Pillow 库。\n(pip install pillow)")
+        except Exception as e:
+            messagebox.showerror("错误", f"无法打开文件：\n{e}")
+
 class ModeSelectionWindow(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)
         self.withdraw()
-        self.title("选择控制模式")
+        self.title("控制模式选择")
         set_window_icon(self)
         self.configure(bg=THEME["bg_window"])
         
@@ -869,8 +1106,8 @@ class ModeSelectionWindow(tk.Toplevel):
         grid_frame = tk.Frame(container, bg=THEME["bg_window"])
         grid_frame.pack(fill="both", expand=True)
 
-        # 状态机视图按钮
-        btn_state = RoundedButton(grid_frame, text="状态机视图 (State Machine)", command=self.open_state_machine_image, 
+        btn_state = RoundedButton(grid_frame, text="状态机视图 (State Machine)", 
+                            command=self.open_diagram_selector, 
                             width=360, height=35, corner_radius=8,
                             bg_normal=THEME["pill_on_bg"], bg_hover="#36bd55", 
                             fg_color="white", outer_bg=THEME["bg_window"], font_size=10)
@@ -879,7 +1116,6 @@ class ModeSelectionWindow(tk.Toplevel):
         for mode_id in range(1, 9):
             name = MODE_NAMES.get(mode_id, f"Mode {mode_id}")
             cmd = lambda m=mode_id: self.open_result_window(m)
-            
             btn = RoundedButton(grid_frame, text=name, command=cmd, 
                                 width=360, height=35, corner_radius=8,
                                 bg_normal=THEME["input_bg"], bg_hover=THEME["pill_on_bg"], 
@@ -892,33 +1128,357 @@ class ModeSelectionWindow(tk.Toplevel):
         ModeResultWindow(self.master, mode_id)
         self.destroy()
 
-    
-    def open_state_machine_image(self):
-        try:
-            img_name = "State_diagram_of_the_Positioning_Mode.PNG"
-            img_path = resource_path(img_name)
-        except Exception:
-            messagebox.showerror("文件缺失", f"未找到图片文件：\n{img_name}\n请确保该图片文件与程序在同一目录下。")
-            return
+    def open_diagram_selector(self):
+        StateDiagramSelectionWindow(self)
 
-        try:
-            # 使用新版的 ImagePopup
-            if Image:
-                ImagePopup(self, img_path, title="状态机视图 (滚轮缩放/拖拽移动)")
-            else:
-                # Fallback if PIL not installed
-                messagebox.showwarning("依赖缺失", "高级图片缩放功能需要安装 Pillow 库。\n(pip install pillow)")
-                # 简单显示逻辑 (不推荐，但作为 fallback)
-                top = tk.Toplevel(self)
-                top.title("状态机视图")
-                img = tk.PhotoImage(file=img_path)
-                lbl = tk.Label(top, image=img)
-                lbl.image = img
-                lbl.pack()
-        except Exception as e:
-            messagebox.showerror("错误", f"无法打开图片：\n{e}")
+class TelegramTableWindow(tk.Toplevel):
+    def __init__(self, parent, telegram_id):
+        super().__init__(parent)
+        self.withdraw()
+        
+        # --- 1. 基础窗口设置 ---
+        self.cfg = TELEGRAM_DATA.get(telegram_id, {})
+        title = self.cfg.get("title", f"报文 {telegram_id}")
+        self.title(title)
+        set_window_icon(self)
+        self.configure(bg=THEME["bg_window"])
+        
+        # 调整窗口大小 (宽度加宽以容纳更多内容，高度适中)
+        w, h = 980, 680
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        self.geometry(f"{w}x{h}+{(sw-w)//2}+{(sh-h)//2}")
+
+        # --- 2. 布局容器 ---
+        # 顶部留一点边距，内容居中或靠上
+        self.container = tk.Frame(self, bg=THEME["bg_window"])
+        self.container.pack(fill="both", expand=True, padx=25, pady=25)
+
+        # --- 3. 字体与颜色定义 ---
+        self.header_bg = THEME["bg_header"]       
+        self.header_fg = THEME["title_fg"]        
+        self.sub_header_bg = "#2c313c"            
+        self.sub_header_fg = "#ffffff"            
+        self.data_bg_1 = THEME["bg_panel"]    
+        self.data_bg_2 = THEME["bg_window"]   
+        self.bold_font = ("Microsoft YaHei UI", 10, "bold")
+        self.norm_font = ("Microsoft YaHei UI", 10)
+
+        # --- 4. 绘制分发 ---
+        if telegram_id == "1":
+            self.draw_common_header(rows=6)
+            self.draw_simple_data()
+        elif telegram_id == "3":
+            self.draw_common_header(rows=11)
+            self.draw_3_layout()
+        elif telegram_id == "102":
+            self.draw_common_header(rows=12)
+            self.draw_102_layout()
+        elif telegram_id == "105":
+            self.draw_common_header(rows=12)
+            self.draw_105_layout()
+        elif telegram_id == "111":
+            self.draw_common_header(rows=16)
+            self.draw_111_layout()
+        elif telegram_id == "352":
+            self.draw_common_header(rows=10)
+            self.draw_simple_data()
+            
+        # --- 5. [核心修改] 优化列宽配置 ---
+        # 这一步放在绘制之后执行，确保覆盖掉之前的配置
+        # Col 0: 标题列 (固定宽度，不拉伸)
+        self.container.columnconfigure(0, weight=0, minsize=110)   
+        # Col 1: 控制器->驱动器 信号 (较窄)
+        self.container.columnconfigure(1, weight=1, minsize=130)  
+        # Col 2: 控制器->驱动器 说明 (较宽)
+        self.container.columnconfigure(2, weight=3, minsize=200)  
+        # Col 3: 驱动器->控制器 信号 (较窄)
+        self.container.columnconfigure(3, weight=1, minsize=130)  
+        # Col 4: 驱动器->控制器 说明 (较宽)
+        self.container.columnconfigure(4, weight=3, minsize=200)  
+            
+        self.deiconify()
+
+    def create_cell(self, row, col, text, rowspan=1, columnspan=1, bg_color=None, fg_color=None, font_style=None):
+        """辅助函数：创建一个带边框的单元格"""
+        if bg_color is None: bg_color = self.data_bg_1
+        if fg_color is None: fg_color = THEME["text_main"]
+        if font_style is None: font_style = self.norm_font
+        border_color = THEME["border"]
+
+        frame = tk.Frame(self.container, bg=border_color, padx=1, pady=1)
+        frame.grid(row=row, column=col, rowspan=rowspan, columnspan=columnspan, sticky="nsew")
+        
+        # 增加 ipadx/ipady 让文字不贴边，增加行高舒适度
+        lbl = tk.Label(frame, text=text, bg=bg_color, fg=fg_color, font=font_style, wraplength=190)
+        lbl.pack(fill="both", expand=True, ipadx=5, ipady=4) 
+        return lbl
+
+    def draw_common_header(self, rows):
+        """绘制顶部 4 行信息"""
+        info = self.cfg.get("info", {})
+        
+        # Row 0
+        self.create_cell(0, 0, "报文类型", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(0, 1, info.get("type",""), columnspan=4, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+        
+        # Row 1
+        self.create_cell(1, 0, "控制模式", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(1, 1, info.get("mode",""), columnspan=4, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+        
+        # Row 2
+        self.create_cell(2, 0, "应用等级", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(2, 1, info.get("class",""), columnspan=4, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+        
+        # Row 3
+        self.create_cell(3, 0, "数量", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(3, 1, info.get("qty_out",""), columnspan=2, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+        self.create_cell(3, 3, info.get("qty_in",""), columnspan=2, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+
+        # Row 4-5
+        self.create_cell(4, 0, "过程数据", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(4, 1, "控制器 → 驱动器", columnspan=2, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+        self.create_cell(4, 3, "驱动器 → 控制器", columnspan=2, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+
+        titles = ["信号", "说明", "信号", "说明"]
+        for i, t in enumerate(titles):
+            self.create_cell(5, 1+i, t, bg_color=self.sub_header_bg, fg_color=self.sub_header_fg, font_style=self.bold_font)
+
+        # [修改] 移除了 rowconfigure 循环，防止行高被强制拉伸
+
+    def draw_simple_data(self):
+        """适用于 1, 352"""
+        data = self.cfg.get("data", [])
+        for idx, row_data in enumerate(data):
+            r = 6 + idx
+            self.create_cell(r, 0, row_data[0], bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+            bg = self.data_bg_1 if idx % 2 == 0 else self.data_bg_2
+            for i in range(1, 5):
+                self.create_cell(r, i, row_data[i], bg_color=bg)
+
+    def draw_111_layout(self):
+        """111 报文布局"""
+        data = self.cfg.get("data", [])
+        for idx, row_data in enumerate(data):
+            r = 6 + idx
+            self.create_cell(r, 0, row_data[0], bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+            bg = self.data_bg_1 if idx % 2 == 0 else self.data_bg_2
+            for i in range(1, 5):
+                self.create_cell(r, i, row_data[i], bg_color=bg)
+
+    def draw_3_layout(self):
+        """标准 3 号报文"""
+        # PZD1
+        self.create_cell(6, 0, "PZD1", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(6, 1, "STW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 2, "控制字 1", bg_color=self.data_bg_1)
+        self.create_cell(6, 3, "ZSW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 4, "状态字 1", bg_color=self.data_bg_1)
+
+        # PZD2-3 (Merged)
+        self.create_cell(7, 0, "PZD2\nPZD3", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(7, 1, "NSOLL_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 2, "转速设定值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 3, "NIST_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 4, "转速实际值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+
+        # PZD4
+        self.create_cell(9, 0, "PZD4", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(9, 1, "STW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 2, "控制字 2", bg_color=self.data_bg_1)
+        self.create_cell(9, 3, "ZSW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 4, "状态字 2", bg_color=self.data_bg_1)
+
+        # PZD5
+        self.create_cell(10, 0, "PZD5", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(10, 1, "G1_STW", bg_color=self.data_bg_2)
+        self.create_cell(10, 2, "编码器 1 控制字", bg_color=self.data_bg_2)
+        self.create_cell(10, 3, "G1_ZSW", bg_color=self.data_bg_2)
+        self.create_cell(10, 4, "编码器 1 状态字", bg_color=self.data_bg_2)
+
+        # PZD6-9
+        self.create_cell(11, 0, "PZD6\nPZD7\nPZD8\nPZD9", rowspan=4, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(11, 1, "无", rowspan=4, bg_color=self.data_bg_1)
+        self.create_cell(11, 2, "无", rowspan=4, bg_color=self.data_bg_1)
+        
+        self.create_cell(11, 3, "G1_XIST1", rowspan=2, bg_color=self.data_bg_1)
+        self.create_cell(11, 4, "增量位置", rowspan=2, bg_color=self.data_bg_1)
+        
+        self.create_cell(13, 3, "G1_XIST2", rowspan=2, bg_color=self.data_bg_1)
+        self.create_cell(13, 4, "绝对位置和编码器故障码", rowspan=2, bg_color=self.data_bg_1)
+
+    def draw_102_layout(self):
+        """102 报文"""
+        # PZD1
+        self.create_cell(6, 0, "PZD1", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(6, 1, "STW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 2, "控制字 1", bg_color=self.data_bg_1)
+        self.create_cell(6, 3, "ZSW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 4, "状态字 1", bg_color=self.data_bg_1)
+
+        # PZD2-3
+        self.create_cell(7, 0, "PZD2\nPZD3", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(7, 1, "NSOLL_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 2, "转速设定值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 3, "NIST_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 4, "转速实际值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+
+        # PZD4
+        self.create_cell(9, 0, "PZD4", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(9, 1, "STW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 2, "控制字 2", bg_color=self.data_bg_1)
+        self.create_cell(9, 3, "ZSW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 4, "状态字 2", bg_color=self.data_bg_1)
+        
+        # PZD5
+        self.create_cell(10, 0, "PZD5", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(10, 1, "MOMRED", bg_color=self.data_bg_2)
+        self.create_cell(10, 2, "扭矩减速", bg_color=self.data_bg_2)
+        self.create_cell(10, 3, "MELDW", bg_color=self.data_bg_2)
+        self.create_cell(10, 4, "消息字", bg_color=self.data_bg_2)
+
+        # PZD6
+        self.create_cell(11, 0, "PZD6", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(11, 1, "G1_STW", bg_color=self.data_bg_1)
+        self.create_cell(11, 2, "编码器 1 控制字", bg_color=self.data_bg_1)
+        self.create_cell(11, 3, "G1_ZSW", bg_color=self.data_bg_1)
+        self.create_cell(11, 4, "编码器 1 状态字", bg_color=self.data_bg_1)
+
+        # PZD7-10
+        self.create_cell(12, 0, "PZD7\nPZD8\nPZD9\nPZD10", rowspan=4, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(12, 1, "无", rowspan=4, bg_color=self.data_bg_2)
+        self.create_cell(12, 2, "无", rowspan=4, bg_color=self.data_bg_2)
+
+        self.create_cell(12, 3, "G1_XIST1", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(12, 4, "增量位置", rowspan=2, bg_color=self.data_bg_2)
+        
+        self.create_cell(14, 3, "G1_XIST2", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(14, 4, "绝对位置和编码器故障码", rowspan=2, bg_color=self.data_bg_2)
+
+    def draw_105_layout(self):
+        """105 报文"""
+        # PZD1
+        self.create_cell(6, 0, "PZD1", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(6, 1, "STW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 2, "控制字 1", bg_color=self.data_bg_1)
+        self.create_cell(6, 3, "ZSW1", bg_color=self.data_bg_1)
+        self.create_cell(6, 4, "状态字 1", bg_color=self.data_bg_1)
+
+        # PZD2-3
+        self.create_cell(7, 0, "PZD2\nPZD3", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(7, 1, "NSOLL_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 2, "转速设定值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 3, "NIST_B", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(7, 4, "转速实际值 B (32 位)", rowspan=2, bg_color=self.data_bg_2)
+
+        # PZD4
+        self.create_cell(9, 0, "PZD4", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(9, 1, "STW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 2, "控制字 2", bg_color=self.data_bg_1)
+        self.create_cell(9, 3, "ZSW2", bg_color=self.data_bg_1)
+        self.create_cell(9, 4, "状态字 2", bg_color=self.data_bg_1)
+
+        # PZD5
+        self.create_cell(10, 0, "PZD5", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(10, 1, "MOMRED", bg_color=self.data_bg_2)
+        self.create_cell(10, 2, "扭矩减速", bg_color=self.data_bg_2)
+        self.create_cell(10, 3, "MELDW", bg_color=self.data_bg_2)
+        self.create_cell(10, 4, "消息字", bg_color=self.data_bg_2)
+
+        # PZD6
+        self.create_cell(11, 0, "PZD6", bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(11, 1, "G1_STW", bg_color=self.data_bg_1)
+        self.create_cell(11, 2, "编码器 1 控制字", bg_color=self.data_bg_1)
+        self.create_cell(11, 3, "G1_ZSW", bg_color=self.data_bg_1)
+        self.create_cell(11, 4, "编码器 1 状态字", bg_color=self.data_bg_1)
+
+        # PZD7-8
+        self.create_cell(12, 0, "PZD7\nPZD8", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(12, 1, "XERR", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(12, 2, "位置偏差值", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(12, 3, "G1_XIST1", rowspan=2, bg_color=self.data_bg_2)
+        self.create_cell(12, 4, "增量位置", rowspan=2, bg_color=self.data_bg_2)
+
+        # PZD9-10
+        self.create_cell(14, 0, "PZD9\nPZD10", rowspan=2, bg_color=self.header_bg, fg_color=self.header_fg, font_style=self.bold_font)
+        self.create_cell(14, 1, "KPC", rowspan=2, bg_color=self.data_bg_1)
+        self.create_cell(14, 2, "位置调节器增益", rowspan=2, bg_color=self.data_bg_1)
+        self.create_cell(14, 3, "G1_XIST2", rowspan=2, bg_color=self.data_bg_1)
+        self.create_cell(14, 4, "绝对位置和编码器故障码", rowspan=2, bg_color=self.data_bg_1)
+
+class TelegramSelectionWindow(tk.Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.withdraw()
+        self.title("选择报文类型")
+        set_window_icon(self)
+        self.configure(bg=THEME["bg_window"])
+        
+        # 增加高度以容纳更多按钮
+        w, h = 350, 520 
+        sw = self.winfo_screenwidth()
+        sh = self.winfo_screenheight()
+        self.geometry(f"{w}x{h}+{(sw-w)//2}+{(sh-h)//2}")
+        self.resizable(False, False)
+        
+        container = tk.Frame(self, bg=THEME["bg_window"])
+        container.pack(fill="both", expand=True, padx=20, pady=20)
+        
+        tk.Label(container, text="请选择要查看的报文", 
+                 font=("Microsoft YaHei UI", 12, "bold"), fg=THEME["title_fg"], bg=THEME["bg_window"]).pack(pady=(0, 15))
+
+        # 排序：1, 3, 102, 105, 111, 352
+        telegram_list = [
+            ("标准 1 号报文", "1"),
+            ("标准 3 号报文", "3"),
+            ("西门子 102 报文", "102"),
+            ("西门子 105 报文", "105"),
+            ("西门子 111 报文", "111"),
+            ("西门子 352 报文", "352")
+        ]
+
+        for name, t_id in telegram_list:
+            cmd = lambda tid=t_id: self.open_table(tid)
+            btn = RoundedButton(container, text=name, command=cmd, 
+                                width=310, height=40, corner_radius=10,
+                                bg_normal=THEME["input_bg"], bg_hover=THEME["pill_on_bg"], 
+                                fg_color="white", outer_bg=THEME["bg_window"], font_size=10)
+            btn.pack(pady=6)
+            
+        self.deiconify()
+        
+    def open_table(self, telegram_id):
+        TelegramTableWindow(self.master, telegram_id)
+        self.destroy()
 
 class ProDriveDashboard(tk.Toplevel):
+
+    def open_draw_tool(self):
+        try:
+            # 判断是否为打包后的 exe 环境 (PyInstaller 会设置 sys.frozen)
+            if getattr(sys, 'frozen', False):
+                # 获取当前 exe 所在的目录
+                base_path = os.path.dirname(sys.executable)
+                # 设定目标 exe 路径 (假设 draw.exe 和主程序在同一目录下)
+                exe_path = os.path.join(base_path, 'draw.exe')
+                
+                if os.path.exists(exe_path):
+                    # 启动外部 exe，不等待其结束
+                    subprocess.Popen([exe_path])
+                else:
+                    messagebox.showerror("文件缺失", f"未找到波形分析工具：\n{exe_path}\n请确保 draw.exe 与主程序在同一目录下。")
+            else:
+                # 源代码运行模式 (保持原样)
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                script_path = os.path.join(current_dir, 'draw.py')
+                if os.path.exists(script_path):
+                    subprocess.Popen([sys.executable, script_path])
+                else:
+                    messagebox.showerror("错误", "找不到 draw.py")
+
+        except Exception as e:
+            messagebox.showerror("启动失败", f"无法启动工具：\n{str(e)}")
+
     def __init__(self, master=None):
         super().__init__(master)
         self.withdraw() 
@@ -930,7 +1490,7 @@ class ProDriveDashboard(tk.Toplevel):
 
         self.panel_configs = {
             "STW1": {
-                "title": "STW1", "icon": "⚡", 
+                "title": "STW1", "icon": "⚙️", 
                 "texts": [
                     "OFF1 减速停机↑", "OFF2 自由停机", "OFF3 紧急停机", "允许运行", 
                     "不拒绝任务", "不暂停任务", "激活运行任务↑", "复位故障↑", 
@@ -939,7 +1499,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "POS_STW1": {
-                "title": "POS_STW1 ", "icon": "⌖", 
+                "title": "POS_STW1 ", "icon": "⚙️", 
                 "texts": [
                     ("运行程序段选择 (Bit0-3)", 4), None, None, None, 
                     "保留", "保留", "保留", "保留", 
@@ -958,7 +1518,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "STW2": {
-                "title": "STW2 ", "icon": "🔧", 
+                "title": "STW2 ", "icon": "⚙️", 
                 "texts": [
                     "保留", "保留", "保留", "保留", 
                     "保留", "保留", "保留", "保留", 
@@ -967,7 +1527,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "ZSW1": {
-                "title": "ZSW1 ", "icon": "📊", 
+                "title": "ZSW1 ", "icon": "⚙️", 
                 "texts": [
                     "准备开启", "准备就绪", "运行使能", "有故障", 
                     "OFF2 无效", "OFF3 无效", "禁止接通", "有报警", 
@@ -976,7 +1536,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "ZSW2": {
-                "title": "ZSW2 ", "icon": "📡", 
+                "title": "ZSW2 ", "icon": "⚙️", 
                 "texts": [
                     "保留", "保留", "保留", "保留", 
                     "保留", "保留", "保留", "保留", 
@@ -985,7 +1545,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "POS_ZSW1": {
-                "title": "POS_ZSW1 ", "icon": "📈", 
+                "title": "POS_ZSW1 ", "icon": "⚙️", 
                 "texts": [
                     ("激活程序段0-15(Bit0-3)", 4), None, None, None, 
                     "保留", "保留", "保留", "保留", 
@@ -994,7 +1554,7 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "POS_ZSW2": {
-                "title": "POS_ZSW2", "icon": "📉", 
+                "title": "POS_ZSW2", "icon": "⚙️", 
                 "texts": [
                     "保留", "到达速度限制", "保留", "保留", 
                     "轴正向移动", "轴负向移动", "负向软限位触发", "正向软限位触发", 
@@ -1003,12 +1563,30 @@ class ProDriveDashboard(tk.Toplevel):
                 ]
             },
             "MELDW": {
-                "title": "MELDW ", "icon": "💬", 
+                "title": "MELDW ", "icon": "⚙️", 
                 "texts": [
                     "保留", "未到达转矩限制", "保留", "保留", 
                     "保留", "保留", "保留", "保留", 
                     "保留", "保留", "保留", "驱动器使能", 
                     "运行准备好", "驱动器运行", "保留", "保留"
+                ]
+            },
+            "EposALWord Lo": {
+                "title": "EposALWord Lo", "icon": "⚙️", 
+                "texts": [
+                    "MDI触发位", "多段触发位", "Home触发 关联STW1.11", "Jog1触发位", 
+                    "Jog2触发位", "保留", "任务取消位", "任务暂停位", 
+                    "Jog模式 0速度/1位置", "位置到达标志", "Home完成", "参考点已设置P01.90", 
+                    "上电后编码器初始化完成", "MDI触发 0手动/1连续", "正向硬件限位状态", "负向硬件限位状态"
+                ]
+            },
+            "EposALWord Ho": {
+                "title": "EposALWord Ho", "icon": "⚙️", 
+                "texts": [
+                    "最小软件限位状态", "最大软件限位状态", ("轴实际方向 0停1正2负", 2), None, 
+                    "到达速度限值标志", "保留", "保留", "保留", 
+                    "保留", "保留", "保留", "保留", 
+                    "保留", "保留", "保留", "保留"
                 ]
             }
         }
@@ -1019,21 +1597,37 @@ class ProDriveDashboard(tk.Toplevel):
         self.container = tk.Frame(self, bg=THEME["bg_window"])
         self.container.pack(fill="both", expand=True, padx=8, pady=8)
         
+        # --- 底部按钮布局修改 ---
         self.footer = tk.Frame(self, bg=THEME["bg_window"])
         self.footer.pack(fill="x", side="bottom", padx=15, pady=(0, 15))
         
-        self.btn_mode = RoundedButton(self.footer, text="选择模式", command=self.open_mode_dialog, 
+        # 左侧容器 (存放 模式选择 和 报文选择)
+        left_btn_frame = tk.Frame(self.footer, bg=THEME["bg_window"])
+        left_btn_frame.pack(side="left")
+
+        self.btn_mode = RoundedButton(left_btn_frame, text="模式选择", command=self.open_mode_dialog, 
                                         width=100, height=35, bg_normal=THEME["input_bg"], bg_hover=THEME["pill_on_bg"], 
                                         fg_color='white', outer_bg=THEME["bg_window"])
-        self.btn_mode.pack(side="left")
+        self.btn_mode.pack(side="left", padx=(0, 10))
 
-        self.btn_switch = RoundedButton(self.footer, text="切换显示", command=self.open_selection_dialog, 
+        # [新增] 报文选择按钮
+        self.btn_telegram = RoundedButton(left_btn_frame, text="报文选择", command=self.open_telegram_dialog, 
+                                        width=100, height=35, bg_normal=THEME["input_bg"], bg_hover=THEME["pill_on_bg"], 
+                                        fg_color='white', outer_bg=THEME["bg_window"])
+        self.btn_telegram.pack(side="left")
+
+        self.btn_draw = RoundedButton(left_btn_frame, text="波形分析器", command=self.open_draw_tool, 
+                                        width=100, height=35, bg_normal=THEME["input_bg"], bg_hover=THEME["pill_on_bg"], 
+                                        fg_color='white', outer_bg=THEME["bg_window"])
+        self.btn_draw.pack(side="left", padx=(10, 0)) # 左侧增加一点间距
+
+        self.btn_switch = RoundedButton(self.footer, text="显示切换", command=self.open_selection_dialog, 
                                         width=100, height=35, bg_normal='#EBCB8B', bg_hover='#D0B075', 
                                         fg_color='#2E3440', outer_bg=THEME["bg_window"])
         self.btn_switch.pack(side="right")
 
         self.refresh_panels()
-        self.center_window(1100, 600)
+        self.center_window(1100, 620)
         self.deiconify()
 
     def open_selection_dialog(self):
@@ -1041,6 +1635,9 @@ class ProDriveDashboard(tk.Toplevel):
 
     def open_mode_dialog(self):
         ModeSelectionWindow(self)
+        
+    def open_telegram_dialog(self):
+        TelegramSelectionWindow(self)
 
     def update_visible_panels(self, new_selection):
         self.visible_keys = new_selection
@@ -1069,7 +1666,9 @@ class ProDriveDashboard(tk.Toplevel):
                 self.vars[var_key].set(str(init_val))
                 
             cfg = self.panel_configs[key]
-            p = PanelColumn(self.container, title, self.vars[var_key], cfg["texts"], cfg["icon"])
+            
+            p = PanelColumn(self.container, title, self.vars[var_key], cfg["texts"], cfg["icon"], entry_width=90)
+            
             p.grid(row=0, column=idx, sticky="nsew", padx=2)
             self.panels[var_key] = p
 

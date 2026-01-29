@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 绘图1.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="11.6929in" height="8.26772in"
+		viewBox="0 0 841.89 595.276" xml:space="preserve" color-interpolation-filters="sRGB" class="st15">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvSubprocessMaster" v:prompt="" v:val="VT4(Rectangle)"/>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#ffffc5;stroke:none;stroke-width:0.25}
+		.st2 {fill:#9fff9f;stroke:#c7c8c8;stroke-width:0.25}
+		.st3 {fill:#000000;font-family:Times New Roman;font-size:0.666664em}
+		.st4 {font-size:0.749991em}
+		.st5 {fill:none;stroke:#000000;stroke-width:1}
+		.st6 {fill:none;stroke:none;stroke-width:0.25}
+		.st7 {fill:#000000;font-family:Times New Roman;font-size:0.499992em}
+		.st8 {font-size:1em}
+		.st9 {fill:#000000;font-family:Times New Roman;font-size:0.833336em}
+		.st10 {marker-end:url(#mrkr4-281);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st11 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.28409090909091}
+		.st12 {marker-end:url(#mrkr4-345);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st13 {marker-start:url(#mrkr13-436);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:1}
+		.st14 {fill:#000000;font-family:Times New Roman;font-size:1.16666em;font-weight:bold}
+		.st15 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend4">
+			<path d="M 2 1 L 0 0 L 2 -1 L 2 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr4-281" class="st11" v:arrowType="4" v:arrowSize="2" v:setback="6.68" refX="-6.68" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
+		</marker>
+		<marker id="mrkr4-345" class="st11" v:arrowType="4" v:arrowSize="2" v:setback="7.04" refX="-7.04" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend4" transform="scale(-3.52,-3.52) "/>
+		</marker>
+		<g id="lend13">
+			<path d="M 3 1 L 0 0 L 3 -1 L 3 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr13-436" class="st11" v:arrowType="13" v:arrowSize="2" v:setback="10.2" refX="10.2" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(3.52) "/>
+		</marker>
+	</defs>
+	<g v:mID="4" v:index="1" v:groupContext="backgroundPage">
+		<v:userDefs>
+			<v:ud v:nameU="msvThemeOrder" v:val="VT0(0):26"/>
+			<v:ud v:nameU="msvVisioCreated" v:prompt="" v:val="VT0(0):26"/>
+		</v:userDefs>
+		<title>背景-1</title>
+		<v:pageProperties width="11.6929" height="8.26772" v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24"
+				v:shadowOffsetX="8.50394" v:shadowOffsetY="-8.50394"/>
+		<g id="shape2-1" v:mID="2" v:groupContext="shape">
+			<title>实心</title>
+			<v:userDefs>
+				<v:ud v:nameU="Background" v:val="VT0(0):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+				<v:ud v:nameU="msvShapeCategories" v:prompt="" v:val="VT4(DoNotContain)"/>
+				<v:ud v:nameU="msvVisioCreated" v:prompt="" v:val="VT0(0):26"/>
+			</v:userDefs>
+			<rect x="0" y="0" width="841.89" height="595.276" class="st1"/>
+		</g>
+	</g>
+	<g v:mID="0" v:index="2" v:groupContext="foregroundPage">
+		<v:userDefs>
+			<v:ud v:nameU="msvThemeOrder" v:val="VT0(0):26"/>
+		</v:userDefs>
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="连接线" v:index="0"/>
+		<g id="shape108-3" v:mID="108" v:groupContext="shape" transform="translate(392.889,-129.073)">
+			<title>矩形</title>
+			<desc>SD1:Normal Operation Gx_ZSW bit 0-7=0000 0000b AND Bit10-15=0...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="56.6929" cy="578.838" width="113.39" height="32.8742"/>
+			<rect x="0" y="562.401" width="113.386" height="32.8742" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="19.26" y="572.84" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD1:Normal Operation<v:newlineChar/><tspan
+						x="20.59" dy="1.3em" class="st4">Gx_ZSW bit 0</tspan><tspan class="st4">-</tspan><tspan class="st4">7=0000 0000b<v:newlineChar/></tspan><tspan
+						x="25.83" dy="1.5em" class="st4">AND Bit10</tspan><tspan class="st4">-</tspan><tspan class="st4">15=00 x000b</tspan></text>		</g>
+		<g id="shape109-12" v:mID="109" v:groupContext="shape" transform="translate(667.701,-120.614)">
+			<title>矩形.15</title>
+			<desc>SD5:Wait For Reference Marks Gx_ZSW bit 0-3 &#60;&#62; 0000b AND bit ...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="66.4202" cy="569.947" width="132.85" height="50.6579"/>
+			<rect x="0" y="544.618" width="132.84" height="50.6579" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="15.44" y="567.55" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD5:Wait For Reference Marks<v:newlineChar/><tspan
+						x="6.51" dy="1.6em" class="st4" v:langID="1033">Gx_ZSW bit 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan
+						class="st4" v:langID="1033">3 &#60;&#62; 0000b</tspan><tspan class="st4"> </tspan><tspan class="st4">AND </tspan><tspan
+						class="st4" v:langID="1033"> </tspan><tspan class="st4" v:langID="1033">bit 4</tspan><tspan class="st4"
+						v:langID="1033">-</tspan><tspan class="st4" v:langID="1033">7 = 0000b</tspan></text>		</g>
+		<g id="shape110-24" v:mID="110" v:groupContext="shape" transform="translate(384.668,-29.4618)">
+			<title>矩形.16</title>
+			<desc>SD7:Set/Shift Home Position(Option) Gx_ZSW bit 12 = 1 (edge t...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="65.6898" cy="578.481" width="131.38" height="33.5898"/>
+			<rect x="0" y="561.686" width="131.38" height="33.5898" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="4.8" y="572.48" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD7:Set/Shift Home Position(Option)<v:newlineChar/><tspan
+						x="21.84" dy="1.3em" class="st4" v:langID="1033">Gx_ZSW bit 12 = 1 (edge triggered)</tspan><tspan
+						class="st4"> </tspan><tspan x="33.08" dy="1.5em" class="st4">AND </tspan><tspan class="st4" v:langID="1033">bit 0</tspan><tspan
+						class="st4" v:langID="1033">-</tspan><tspan class="st4" v:langID="1033">7 = 0000 0000b</tspan></text>		</g>
+		<g id="shape111-33" v:mID="111" v:groupContext="shape" transform="translate(44.7566,-124.114)">
+			<title>矩形.17</title>
+			<desc>SD10 Wait For Measured Value Gx_ZSW bit 0-3 &#60;&#62; 0000b AND bit ...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="98.5525" cy="574.866" width="197.11" height="40.8189"/>
+			<rect x="0" y="554.457" width="197.105" height="40.8189" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="46.79" y="572.47" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD10 Wait For Measured Value<v:newlineChar/><tspan
+						x="39.4" dy="1.6em" class="st4" v:langID="1033">Gx_ZSW bit 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan
+						class="st4" v:langID="1033">3 &#60;&#62; 0000b</tspan><tspan class="st4"> </tspan><tspan class="st4">AND </tspan><tspan
+						class="st4" v:langID="1033">bit 4</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan class="st4"
+						v:langID="1033">7 = 0000b</tspan></text>		</g>
+		<g id="shape112-44" v:mID="112" v:groupContext="shape" transform="translate(30.189,-245.238)">
+			<title>矩形.18</title>
+			<desc>SD11:Measured Value In Gx_XIST2 Gx_ZSW bit 4-7 &#60;&#62; 0000b AND f...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="112.869" cy="572.832" width="225.74" height="44.888"/>
+			<rect x="0" y="550.388" width="225.739" height="44.888" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="53.21" y="566.83" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD11:Measured Value In Gx_XIST2<v:newlineChar/><v:paragraph
+						v:horizAlign="1" v:bulletSize="0.166667"/><tspan x="73.07" dy="1.3em" class="st4" v:langID="1033">Gx_ZSW bit 4</tspan><tspan
+						class="st4" v:langID="1033">-</tspan><tspan class="st4" v:langID="1033">7 &#60;&#62; 0000b</tspan><tspan
+						class="st4"> </tspan><tspan class="st4">AND</tspan><tspan class="st4" v:langID="1033"> </tspan><tspan
+						x="41.95" dy="1.5em" class="st4" v:langID="1033">for bits 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan
+						class="st4" v:langID="1033">3: bit related to the requested</tspan><tspan class="st4"> </tspan><tspan
+						class="st4" v:langID="1033">measured value = 0</tspan></text>		</g>
+		<g id="shape113-58" v:mID="113" v:groupContext="shape" transform="translate(638.683,-253.276)">
+			<title>矩形.20</title>
+			<desc>SD4:Reference Value In Gx_XIST2 Gx_ZSW bit 4-7 &#60;&#62; 0000b, bit ...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="78.8443" cy="573.632" width="157.69" height="43.2878"/>
+			<rect x="0" y="551.988" width="157.689" height="43.2878" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="20.75" y="571.23" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD4:Reference Value In Gx_XIST2<v:newlineChar/><tspan
+						x="26.19" dy="1.6em" class="st4" v:langID="1033">Gx_ZSW bit 4</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan
+						class="st4" v:langID="1033">7 &#60;&#62; 0000b, bit 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan
+						class="st4" v:langID="1033">3 = 0000b</tspan></text>		</g>
+		<g id="shape114-66" v:mID="114" v:groupContext="shape" transform="translate(61.937,-421.087)">
+			<title>矩形.21</title>
+			<desc>SD12:Parking Gx_ZSW bit 14 = 1</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="30.3307" cy="569.947" width="60.67" height="50.6579"/>
+			<rect x="0" y="544.618" width="60.6614" height="50.6579" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="7.66" y="567.55" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD12:Parking<v:newlineChar/><tspan
+						x="6.47" dy="1.6em" class="st4" v:langID="1033">Gx_ZSW bit 14 = 1</tspan></text>		</g>
+		<g id="shape115-70" v:mID="115" v:groupContext="shape" transform="translate(19.9842,-18)">
+			<title>矩形.22</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="299.906" width="797.102" height="295.37" rx="14.1732" ry="14.1732" class="st5"/>
+		</g>
+		<g id="shape116-72" v:mID="116" v:groupContext="shape" transform="translate(253.882,-448.784)">
+			<title>矩形.23</title>
+			<desc>SD14 Parking &#38; Error Acknowledgement(Option) Gx_ZSW bit 14 , ...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="89.1599" cy="569.947" width="178.32" height="50.6579"/>
+			<rect x="0" y="544.618" width="178.32" height="50.6579" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="8.06" y="560.35" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD14 Parking &#38; Error Acknowledgement(Option)<v:newlineChar/><v:paragraph
+						v:horizAlign="1" v:bulletSize="0.166667"/><tspan x="26.69" dy="1.3em" class="st4" v:langID="1033">Gx_ZSW bit 14 </tspan><tspan
+						class="st4">,</tspan><tspan class="st4" v:langID="1033"> </tspan><tspan class="st4" v:langID="1033">11 = 1</tspan><tspan
+						class="st4"> </tspan><tspan class="st4">AND</tspan><tspan class="st4" v:langID="1033"> </tspan><tspan
+						class="st4" v:langID="1033">bit 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan class="st4"
+						v:langID="1033">7 = 0000 0000b<v:newlineChar/></tspan><tspan x="65.3" dy="1.2em" class="st4"
+						v:langID="1033">Gx_ZSW bit 15 = 1<v:newlineChar/></tspan><tspan x="15.34" dy="1.5em" class="st4"
+						v:langID="1033">Errorcode is posted in Gx_XIST2 (as long as</tspan><tspan class="st4"> </tspan><tspan
+						class="st4" v:langID="1033">error is present)</tspan></text>		</g>
+		<g id="shape117-89" v:mID="117" v:groupContext="shape" transform="translate(260.322,-372.989)">
+			<title>矩形.24</title>
+			<desc>SD2 Error Acknowledgement Gx_ZSW bit11=1,0-7=0000 0000b AND G...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="77.5276" cy="576.228" width="155.06" height="38.0956"/>
+			<rect x="0" y="557.18" width="155.055" height="38.0956" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="29.76" y="567.83" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD2 Error Acknowledgement<v:newlineChar/><tspan
+						x="35.23" dy="1.3em" class="st4">Gx_ZSW bit11=1,0</tspan><tspan class="st4">-</tspan><tspan class="st4">7=0000 0000b<v:newlineChar/><v:paragraph
+							v:horizAlign="1" v:bulletSize="0.166667"/></tspan><tspan x="11.6" dy="1.2em" class="st4">AND </tspan><tspan
+						class="st4" v:langID="1033">Gx_ZSW bit 15 = 1 as</tspan><tspan class="st4"> </tspan><tspan class="st4"
+						v:langID="1033">long as valid Errorcode is </tspan><tspan x="19.21" dy="1.2em" class="st4" v:langID="1033">posted in Gx_XIST2 (as long as error is</tspan><tspan
+						class="st4"> </tspan><tspan class="st4" v:langID="1033">present)</tspan></text>		</g>
+		<g id="shape118-102" v:mID="118" v:groupContext="shape" transform="translate(654.945,-447.083)">
+			<title>矩形.25</title>
+			<desc>SD13 Parking &#38; Error(Option) Gx_ZSW bit 15, 14 = 1, Gx_ZSW bi...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="63.2424" cy="569.947" width="126.49" height="50.6579"/>
+			<rect x="0" y="544.618" width="126.485" height="50.6579" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="13.36" y="563.95" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD13 Parking &#38; Error(Option)<v:newlineChar/><v:paragraph
+						v:horizAlign="1" v:bulletSize="0.166667"/><tspan x="34.13" dy="1.3em" class="st4" v:langID="1033">Gx_ZSW bit 15</tspan><tspan
+						class="st4">,</tspan><tspan class="st4" v:langID="1033"> </tspan><tspan class="st4" v:langID="1033">14 = 1,<v:newlineChar/></tspan><tspan
+						x="13.28" dy="1.5em" class="st4" v:langID="1033">Gx_ZSW bit 11 = 0, bit 0</tspan><tspan class="st4"
+						v:langID="1033">-</tspan><tspan class="st4" v:langID="1033">7= 0000 0000b</tspan></text>		</g>
+		<g id="shape119-112" v:mID="119" v:groupContext="shape" transform="translate(652.87,-377.038)">
+			<title>矩形.26</title>
+			<desc>SD3 Error(ErrorCode In Gx_XIST2) Gx_ZSW bit 15 = 1 AND bit 11...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="63.2424" cy="578.318" width="126.49" height="33.9152"/>
+			<rect x="0" y="561.36" width="126.485" height="33.9152" rx="14.1732" ry="14.1732" class="st2"/>
+			<text x="4.03" y="572.32" class="st3" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>SD3 Error(ErrorCode In Gx_XIST2)<v:newlineChar/><tspan
+						x="19.78" dy="1.3em" class="st4" v:langID="1033">Gx_ZSW bit 15 = 1</tspan><tspan class="st4"> </tspan><tspan
+						class="st4">AND </tspan><tspan class="st4" v:langID="1033">bit 11 = 0</tspan><tspan class="st4"> </tspan><tspan
+						x="29.88" dy="1.5em" class="st4">AND </tspan><tspan class="st4" v:langID="1033"> </tspan><tspan class="st4"
+						v:langID="1033">bit 0</tspan><tspan class="st4" v:langID="1033">-</tspan><tspan class="st4" v:langID="1033">7 = 0000 0000b</tspan></text>		</g>
+		<g id="shape120-125" v:mID="120" v:groupContext="shape" transform="translate(15.0742,-336.543)">
+			<title>工作表.120</title>
+			<desc>Gx_STW bit 14 = 1 (NOTE 1) additional condition, when SD13, S...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="88.7907" cy="578.212" width="177.59" height="34.1278"/>
+			<rect x="0" y="561.148" width="177.581" height="34.1278" class="st6"/>
+			<text x="51.94" y="572.81" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 14 = 1<tspan
+						class="st8" v:langID="2052"> </tspan><tspan class="st8" v:langID="2052">(NOTE 1)<v:newlineChar/></tspan><tspan
+						x="19.14" dy="1.2em" class="st8">additional condition, when SD13, SD14 are implemented:<v:newlineChar/></tspan><tspan
+						x="7.39" dy="1.2em" class="st8" v:langID="2052">OR</tspan> when (Gx_XIST1 is invalid and no error is occurred or present)</text>		</g>
+		<g id="shape121-132" v:mID="121" v:groupContext="shape" transform="translate(148.215,-323.023)">
+			<title>工作表.121</title>
+			<desc>Gx_STW bit 14 = 0 AND Gx_ZSW bit 14 was set for at least 100 ...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="94.5911" cy="585.276" width="189.19" height="20"/>
+			<rect x="0" y="575.276" width="189.182" height="20" class="st6"/>
+			<text x="70.73" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 14 = 0<tspan
+						class="st8" v:langID="2052"> </tspan><tspan x="10.19" dy="1.2em" class="st8" v:langID="2052">AND</tspan> Gx_ZSW bit 14 was set for at least 100 ms<tspan
+						class="st8" v:langID="2052"> </tspan>additional condition, <tspan x="22.6" dy="1.2em" class="st8">when SD13, SD14 are implemented:and Gx_XIST1 is valid</tspan></text>		</g>
+		<g id="shape122-139" v:mID="122" v:groupContext="shape" transform="translate(442.913,-253.465)">
+			<title>工作表.122</title>
+			<desc>Gx_STW bit 15 = 0 and error removed</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="38.8346" cy="585.276" width="77.67" height="20"/>
+			<rect x="0" y="575.276" width="77.6693" height="20" class="st6"/>
+			<text x="9.9" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 15 = 0 and <tspan
+						x="21.76" dy="1.2em" class="st8">error removed</tspan></text>		</g>
+		<g id="shape123-143" v:mID="123" v:groupContext="shape" transform="translate(483.896,-227.54)">
+			<title>工作表.123</title>
+			<desc>Gx_STW bit 4-6 = 000b</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="44.0116" cy="587.592" width="88.03" height="15.3668"/>
+			<rect x="0" y="579.909" width="88.0232" height="15.3668" class="st6"/>
+			<text x="14.65" y="589.39" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 4-6 = 000b</text>		</g>
+		<g id="shape124-146" v:mID="124" v:groupContext="shape" transform="translate(571.174,-187.631)">
+			<title>工作表.124</title>
+			<desc>Gx_STW bit 7 = 0, 4-6 = 010b AND Gx_STW bit 0-3 &#60;&#62; 0000b AND ...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="47.9055" cy="575.364" width="95.82" height="39.8228"/>
+			<rect x="0" y="555.453" width="95.811" height="39.8228" class="st6"/>
+			<text x="10.86" y="569.96" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 7 = 0<tspan
+						class="st8" v:langID="2052">,</tspan> 4-6 = 010b <v:newlineChar/><tspan x="8.11" dy="1.2em" class="st8"
+						v:langID="2052">AND </tspan>Gx_STW bit 0-3 &#60;&#62; 0000b <v:newlineChar/><tspan x="10.75" dy="1.2em"
+						class="st8" v:langID="2052">AND</tspan> Reference value is found</text>		</g>
+		<g id="shape125-152" v:mID="125" v:groupContext="shape" transform="translate(547.076,-142.927)">
+			<title>工作表.125</title>
+			<desc>Gx_STW bit 4-6 = 000b AND reference mark found</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="40.2874" cy="585.276" width="80.58" height="20"/>
+			<rect x="0" y="575.276" width="80.5748" height="20" class="st6"/>
+			<text x="10.93" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 4-6 = 000b <tspan
+						x="7.22" dy="1.2em" class="st8" v:langID="2052">AND</tspan> reference mark found</text>		</g>
+		<g id="shape126-156" v:mID="126" v:groupContext="shape" transform="translate(580.299,-68.2677)">
+			<title>工作表.126</title>
+			<desc>Gx_STW bit 7 = 0 , bit 4-6 = 001b AND Gx_STW bit 0-3 &#60;&#62; 0000b</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="46.2503" cy="585.276" width="92.51" height="20"/>
+			<rect x="0" y="575.276" width="92.5006" height="20" class="st6"/>
+			<text x="4.53" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 7 = 0 <tspan
+						class="st8" v:langID="2052">,</tspan> bit 4-6 = 001b <v:newlineChar/><tspan x="6.45" dy="1.2em" class="st8"
+						v:langID="2052">AND </tspan>Gx_STW bit 0-3 &#60;&#62; 0000b</text>		</g>
+		<g id="shape127-161" v:mID="127" v:groupContext="shape" transform="translate(442.272,-89.3883)">
+			<title>工作表.127</title>
+			<desc>Gx_STW bit12=1</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="25.7953" cy="591.48" width="51.6" height="7.59178"/>
+			<rect x="0" y="587.684" width="51.5906" height="7.59178" class="st6"/>
+			<text x="4.19" y="593.28" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit12=1</text>		</g>
+		<g id="shape128-164" v:mID="128" v:groupContext="shape" transform="translate(395.764,-89.0551)">
+			<title>工作表.128</title>
+			<desc>Gx_STW bit12=0</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="26.4094" cy="591.417" width="52.82" height="7.71654"/>
+			<rect x="0" y="587.559" width="52.8189" height="7.71654" class="st6"/>
+			<text x="4.8" y="593.22" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit12=0</text>		</g>
+		<g id="shape129-167" v:mID="129" v:groupContext="shape" transform="translate(71.7638,-65.622)">
+			<title>工作表.129</title>
+			<desc>New command a in Gx_STW bit 0-6, 7 = 1, AND bit 4-6 = 001b AN...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.2441" cy="585.276" width="118.49" height="20"/>
+			<rect x="0" y="575.276" width="118.488" height="20" class="st6"/>
+			<text x="6.48" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>New command a in Gx_STW bit 0-6<tspan
+						class="st8" v:langID="2052">,</tspan> 7 = 1<tspan class="st8" v:langID="2052">,<v:newlineChar/></tspan><tspan
+						x="34.89" dy="1.2em" class="st8" v:langID="2052">AND </tspan>bit 4-6 = 001b<v:newlineChar/><tspan x="19.45"
+						dy="1.2em" class="st8" v:langID="2052">AND </tspan>Gx_STW bit 0-3 &#60;&#62; 0000b</text>		</g>
+		<g id="shape130-174" v:mID="130" v:groupContext="shape" transform="translate(18.0448,-190.839)">
+			<title>工作表.130</title>
+			<desc>(Gx_STW bit 7 = 1 , bit 4-6 = 001b , bit 0-3 &#60;&#62; 0000b) OR (Gx...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="70.2768" cy="578.875" width="140.56" height="32.8007"/>
+			<rect x="0" y="562.475" width="140.554" height="32.8007" class="st6"/>
+			<text x="4.01" y="569.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>(Gx_STW bit 7 = 1 <tspan
+						class="st8" v:langID="2052">,</tspan> bit 4-6 = 001b <tspan class="st8" v:langID="2052">,</tspan> bit 0-3 &#60;&#62; 0000b)<tspan
+						class="st8" v:langID="2052"> </tspan><tspan x="66.11" dy="1.2em" class="st8" v:langID="2052">OR <v:newlineChar/></tspan><tspan
+						x="6.02" dy="1.2em" class="st8">(Gx_STW bit 4</tspan>-6 = 000b while measurement process <tspan x="18.13"
+						dy="1.2em" class="st8">still active (not all measured values</tspan><tspan class="st8" v:langID="2052"> </tspan>found))</text>		</g>
+		<g id="shape131-184" v:mID="131" v:groupContext="shape" transform="translate(150.08,-198.448)">
+			<title>工作表.131</title>
+			<desc>Gx_STW bit 7 = 1, 4-6 = 010b AND Gx_STW bit 0-3 &#60;&#62; 0000b AND ...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="47.5847" cy="585.276" width="95.17" height="20"/>
+			<rect x="0" y="575.276" width="95.1695" height="20" class="st6"/>
+			<text x="10.54" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 7 = 1<tspan
+						class="st8" v:langID="2052">,</tspan> 4-6 = 010b<tspan class="st8" v:langID="2052"> </tspan><tspan x="7.79"
+						dy="1.2em" class="st8" v:langID="2052">AND</tspan> Gx_STW bit 0-3 &#60;&#62; 0000b <v:newlineChar/><tspan
+						x="4.93" dy="1.2em" class="st8" v:langID="2052">AND</tspan> related<tspan class="st8" v:langID="2052"> </tspan>measured value found</text>		</g>
+		<g id="shape132-192" v:mID="132" v:groupContext="shape" transform="translate(271.671,-142.128)">
+			<title>工作表.132</title>
+			<desc>Gx_STW bit 4-6 = 000b AND measured values found</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="40.0444" cy="585.276" width="80.09" height="20"/>
+			<rect x="0" y="575.276" width="80.0889" height="20" class="st6"/>
+			<text x="10.69" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 4-6 = 000b <v:newlineChar/><tspan
+						x="5.14" dy="1.2em" class="st8" v:langID="2052">AND</tspan> measured values found</text>		</g>
+		<g id="shape133-196" v:mID="133" v:groupContext="shape" transform="translate(278.06,-131.632)">
+			<title>工作表.133</title>
+			<desc>Gx_STW bit 4-6 = 011b</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="33.9246" cy="591.358" width="67.85" height="7.83567"/>
+			<rect x="0" y="587.44" width="67.8493" height="7.83567" class="st6"/>
+			<text x="4.57" y="593.16" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 4-6 = 011b</text>		</g>
+		<g id="shape134-199" v:mID="134" v:groupContext="shape" transform="translate(253.888,-261.048)">
+			<title>工作表.134</title>
+			<desc>New command a in Gx_STW bit 0-6, bit 7 = 1 , bit 4-6 = 010b A...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="85.748" cy="585.276" width="171.5" height="20"/>
+			<rect x="0" y="575.276" width="171.496" height="20" class="st6"/>
+			<text x="10.46" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>New command a in Gx_STW bit 0-6<tspan
+						class="st8" v:langID="2052">,</tspan> bit 7 = 1 <tspan class="st8" v:langID="2052">,</tspan> bit 4-6 = 010b<v:newlineChar/><tspan
+						x="4.72" dy="1.2em" class="st8" v:langID="2052">AND</tspan> Gx_STW bit 0-3 &#60;&#62; 0000b and related<tspan
+						class="st8" v:langID="2052"> </tspan>measured value found</text>		</g>
+		<g id="shape135-206" v:mID="135" v:groupContext="shape" transform="translate(266.976,-206.598)">
+			<title>工作表.135</title>
+			<desc>(Gx_STW bit 4-6 = 000b while no measurement process is active...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="87.9753" cy="585.276" width="175.96" height="20"/>
+			<rect x="0" y="575.276" width="175.951" height="20" class="st6"/>
+			<text x="57.62" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>(Gx_STW bit 4-6 = 000b <v:newlineChar/><tspan
+						x="5.25" dy="1.2em" class="st8">while no measurement process is active</tspan><tspan class="st8"
+						v:langID="2052"> </tspan>(all measured values<tspan class="st8" v:langID="2052"> </tspan>found)) <v:newlineChar/><tspan
+						x="21.35" dy="1.2em" class="st8" v:langID="2052">OR </tspan>(Gx_STW bit 7 = 1 <tspan class="st8"
+						v:langID="2052">AND</tspan> Gx_STW bit 4-6 = 011b)</text>		</g>
+		<g id="shape136-214" v:mID="136" v:groupContext="shape" transform="translate(252.982,-174.817)">
+			<title>工作表.136</title>
+			<desc>Gx_STW bit 7 = 1 , bit 4-6 = 010b AND Gx_STW bit 0-3 &#60;&#62; 0000b...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="48.7087" cy="585.276" width="97.42" height="20"/>
+			<rect x="0" y="575.276" width="97.4173" height="20" class="st6"/>
+			<text x="6.99" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 7 = 1 <tspan
+						class="st8" v:langID="2052">,</tspan> bit 4-6 = 010b<v:newlineChar/><tspan x="8.16" dy="1.2em" class="st8"> </tspan><tspan
+						class="st8" v:langID="2052">AND</tspan> Gx_STW bit 0-3 &#60;&#62; 0000b <v:newlineChar/><tspan x="6.06"
+						dy="1.2em" class="st8" v:langID="2052">AND</tspan> related<tspan class="st8" v:langID="2052"> </tspan>measured value found</text>		</g>
+		<g id="shape137-222" v:mID="137" v:groupContext="shape" transform="translate(667.134,-330.661)">
+			<title>工作表.137</title>
+			<desc>Error occurred or a command is illegal</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="53.2523" cy="590.236" width="106.51" height="10.0787"/>
+			<rect x="0" y="585.197" width="106.505" height="10.0787" class="st6"/>
+			<text x="6.77" y="592.04" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Error occurred or a command is illegal</text>		</g>
+		<g id="shape138-225" v:mID="138" v:groupContext="shape" transform="translate(455.903,-393.652)">
+			<title>工作表.138</title>
+			<desc>Gx_STW bit 15 = 0 AND an error still exists while Gx_XIST1 is...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="65.3234" cy="585.276" width="130.65" height="20"/>
+			<rect x="0" y="575.276" width="130.647" height="20" class="st6"/>
+			<text x="41.47" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 15 = 0 <v:newlineChar/><tspan
+						x="4.83" dy="1.2em" class="st8" v:langID="2052">AND</tspan> an error still exists while Gx_XIST1 is valid</text>		</g>
+		<g id="shape139-229" v:mID="139" v:groupContext="shape" transform="translate(462.378,-375.732)">
+			<title>工作表.139</title>
+			<desc>Gx_STW bit 15 = 1 and Gx_XIST1 valid</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="54.1417" cy="589.48" width="108.29" height="11.5906"/>
+			<rect x="0" y="583.685" width="108.283" height="11.5906" class="st6"/>
+			<text x="4.37" y="591.28" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 15 = 1 and Gx_XIST1 valid</text>		</g>
+		<g id="shape140-232" v:mID="140" v:groupContext="shape" transform="translate(473.923,-472.866)">
+			<title>工作表.140</title>
+			<desc>Gx_STW bit 15 = 1 while Gx_XIST1 invalid</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="59.356" cy="585.276" width="118.72" height="20"/>
+			<rect x="0" y="575.276" width="118.712" height="20" class="st6"/>
+			<text x="4.92" y="587.08" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 15 = 1 while Gx_XIST1 invalid</text>		</g>
+		<g id="shape141-235" v:mID="141" v:groupContext="shape" transform="translate(477.917,-447.586)">
+			<title>工作表.141</title>
+			<desc>Gx_STW bit 15 = 0 and error still exists</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="57.8369" cy="585.276" width="115.68" height="20"/>
+			<rect x="0" y="575.276" width="115.674" height="20" class="st6"/>
+			<text x="9.48" y="587.08" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 15 = 0 and error still exists</text>		</g>
+		<g id="shape142-238" v:mID="142" v:groupContext="shape" transform="translate(329.339,-420.142)">
+			<title>工作表.142</title>
+			<desc>Gx_XIST1 valid and Gx_ZSW bit 14 was set for at least 100 ms ...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="63.4488" cy="585.276" width="126.9" height="20"/>
+			<rect x="0" y="575.276" width="126.898" height="20" class="st6"/>
+			<text x="4.62" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_XIST1 valid and Gx_ZSW bit 14 was set for <tspan
+						x="13.51" dy="1.2em" class="st8">at least 100 ms while Gx_STW bit 15 = 1</tspan></text>		</g>
+		<g id="shape143-242" v:mID="143" v:groupContext="shape" transform="translate(262.819,-423.118)">
+			<title>工作表.143</title>
+			<desc>Gx_XIST1 invalid while Gx_STW bit 15 = 1</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="34.4409" cy="588.384" width="68.89" height="13.7823"/>
+			<rect x="0" y="581.493" width="68.8819" height="13.7823" class="st6"/>
+			<text x="4.61" y="586.58" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_XIST1 invalid while <tspan
+						x="10.58" dy="1.2em" class="st8">Gx_STW bit 15 = 1</tspan></text>		</g>
+		<g id="shape144-246" v:mID="144" v:groupContext="shape" transform="translate(251.21,-350.342)">
+			<title>矩形.85</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="427.019" width="566.929" height="168.256" rx="14.1732" ry="14.1732" class="st5"/>
+		</g>
+		<g id="shape145-248" v:mID="145" v:groupContext="shape" transform="translate(698.031,-419.386)">
+			<title>工作表.145</title>
+			<desc>Gx_XIST1 valid AND Gx_ZSW bit 14 = 1 for at least 100 ms</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="58.9758" cy="585.276" width="117.96" height="20"/>
+			<rect x="0" y="575.276" width="117.952" height="20" class="st6"/>
+			<text x="38.89" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_XIST1 valid <v:newlineChar/><tspan
+						x="4.96" dy="1.2em" class="st8" v:langID="2052">AND</tspan> Gx_ZSW bit 14 = 1 for at least 100 ms</text>		</g>
+		<g id="shape146-252" v:mID="146" v:groupContext="shape" transform="translate(650.22,-425.055)">
+			<title>工作表.146</title>
+			<desc>Gx_XIST1 invalid</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="27.1616" cy="591.843" width="54.33" height="6.86614"/>
+			<rect x="0" y="588.409" width="54.3233" height="6.86614" class="st6"/>
+			<text x="4.75" y="593.64" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_XIST1 invalid</text>		</g>
+		<g id="shape147-255" v:mID="147" v:groupContext="shape" transform="translate(30.7261,-293.93)">
+			<title>工作表.147</title>
+			<desc>B1</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.3476" cy="585.276" width="34.7" height="20"/>
+			<rect x="0" y="575.276" width="34.6952" height="20" class="st6"/>
+			<text x="11.51" y="588.28" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>B1</text>		</g>
+		<g id="shape148-258" v:mID="148" v:groupContext="shape" transform="translate(262.64,-498.612)">
+			<title>工作表.148</title>
+			<desc>B2</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.3476" cy="585.276" width="34.7" height="20"/>
+			<rect x="0" y="575.276" width="34.6952" height="20" class="st6"/>
+			<text x="11.51" y="588.28" class="st9" v:langID="2052"><v:paragraph v:horizAlign="1"/><v:tabList/>B2</text>		</g>
+		<g id="shape149-261" v:mID="149" v:groupContext="shape" transform="translate(286.217,-531.145)">
+			<title>工作表.149</title>
+			<desc>Gx_STW bit 14 = 0 AND (Gx_XIST1 invalid and an error or an il...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="97.6237" cy="585.276" width="195.25" height="20"/>
+			<rect x="0" y="575.276" width="195.247" height="20" class="st6"/>
+			<text x="73.77" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 14 = 0<v:newlineChar/><tspan
+						x="7.07" dy="1.2em" class="st8" v:langID="2052">AND </tspan>(Gx_XIST1 invalid and an error or an illegal command has<tspan
+						class="st8" v:langID="2052"> </tspan>occurred)</text>		</g>
+		<g id="shape150-266" v:mID="150" v:groupContext="shape" transform="translate(133.269,-438.54)">
+			<title>工作表.150</title>
+			<desc>Gx_STW bit 14 = 1 OR (Gx_STW bit 15 = 0 and error removed, wh...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="49.8898" cy="585.276" width="99.78" height="20"/>
+			<rect x="0" y="575.276" width="99.7795" height="20" class="st6"/>
+			<text x="26.03" y="579.88" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>Gx_STW bit 14 = 1<v:newlineChar/><tspan
+						x="8.46" dy="1.2em" class="st8" v:langID="2052">OR </tspan>(Gx_STW bit 15 = 0 and error <tspan x="4.31"
+						dy="1.2em" class="st8">removed, while Gx_XIST1 is invalid)</tspan></text>		</g>
+		<g id="shape151-271" v:mID="151" v:groupContext="shape" transform="translate(226.913,-48.1368)">
+			<title>工作表.151</title>
+			<desc>Gx_STW bit 7 = 1 AND bit 4-6 = 001b AND Gx_STW bit 0-3 &#60;&#62; 0000b</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="52.0829" cy="585.276" width="104.17" height="20"/>
+			<rect x="0" y="575.276" width="104.166" height="20" class="st6"/>
+			<text x="4.62" y="583.48" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 7 = 1 <tspan
+						class="st8" v:langID="2052">AND</tspan> bit 4-6 = 001b <v:newlineChar/><tspan x="12.28" dy="1.2em"
+						class="st8" v:langID="2052">AND</tspan> Gx_STW bit 0-3 &#60;&#62; 0000b</text>		</g>
+		<g id="shape152-276" v:mID="152" v:groupContext="shape" v:layerMember="0" transform="translate(345.912,-372.756)">
+			<title>动态连接线.109</title>
+			<path d="M0 595.28 C29.54 651.54 80.89 649.43 105.34 650.24 C123.08 650.82 126.65 652.93 128.66 686.47 L128.67 686.83"
+					class="st10"/>
+		</g>
+		<g id="shape153-282" v:mID="153" v:groupContext="shape" v:layerMember="0" transform="translate(637.795,-279.071)">
+			<title>动态连接线.112</title>
+			<path d="M0 595.28 C-5.2 594.61 -32.92 595.18 -49.02 598.23 C-67.24 601.69 -70.59 608.33 -84.3 624.06 L-84.54 624.33"
+					class="st10"/>
+		</g>
+		<g id="shape154-287" v:mID="154" v:groupContext="shape" v:layerMember="0" transform="translate(524.173,-229.465)">
+			<title>动态连接线.113</title>
+			<path d="M0 595.28 C0.83 592.44 -7.34 610.63 -13.27 621.79 C-21.51 637.28 -25.43 639.23 -34.56 655.68 L-34.73 656"
+					class="st10"/>
+		</g>
+		<g id="shape155-292" v:mID="155" v:groupContext="shape" v:layerMember="0" transform="translate(501.591,-160.724)">
+			<title>动态连接线.119</title>
+			<path d="M0 595.28 C19.85 580.27 29.77 580.18 36.91 571.64 C42.75 564.64 46.72 551.97 64.97 549.5 L65.33 549.47"
+					class="st10"/>
+		</g>
+		<g id="shape156-297" v:mID="156" v:groupContext="shape" v:layerMember="0" transform="translate(664.583,-213.874)">
+			<title>动态连接线.120</title>
+			<path d="M0 595.28 C13.61 595.98 34 592.87 43.84 584.77 C50.55 579.25 52.35 571.4 52.83 564.14 L52.84 563.78"
+					class="st10"/>
+		</g>
+		<g id="shape157-302" v:mID="157" v:groupContext="shape" v:layerMember="0" transform="translate(667.276,-145.26)">
+			<title>动态连接线.122</title>
+			<path d="M0 588.32 C-10.43 588.32 -28 588.32 -36.47 588.26 L-36.83 588.25" class="st10"/>
+		</g>
+		<g id="shape158-307" v:mID="158" v:groupContext="shape" v:layerMember="0" transform="translate(555.165,-161.929)">
+			<title>动态连接线.123</title>
+			<path d="M0 602.15 C-12.4 602.15 -33.61 602.15 -42.86 602.25 L-43.22 602.27" class="st10"/>
+		</g>
+		<g id="shape159-312" v:mID="159" v:groupContext="shape" transform="translate(556.694,-124.198)">
+			<title>工作表.159</title>
+			<desc>Gx_STW bit 4-6 = 011b</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="35.6052" cy="585.276" width="71.22" height="20"/>
+			<rect x="0" y="575.276" width="71.2104" height="20" class="st6"/>
+			<text x="6.25" y="587.08" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Gx_STW bit 4-6 = 011b</text>		</g>
+		<g id="shape160-315" v:mID="160" v:groupContext="shape" v:layerMember="0" transform="translate(667.417,-126.974)">
+			<title>动态连接线.127</title>
+			<path d="M0 588.31 C-10.47 588.31 -28.12 588.31 -36.62 588.26 L-36.98 588.25" class="st10"/>
+		</g>
+		<g id="shape161-320" v:mID="161" v:groupContext="shape" v:layerMember="0" transform="translate(558.85,-126.992)">
+			<title>动态连接线.128</title>
+			<path d="M0 588.33 C-13.75 588.33 -37.32 588.33 -47.42 588.26 C-47.6 588.26 -47.78 588.26 -47.96 588.26 L-48.32 588.25"
+					class="st10"/>
+		</g>
+		<g id="shape162-325" v:mID="162" v:groupContext="shape" v:layerMember="0" transform="translate(670.252,-78.8031)">
+			<title>动态连接线.131</title>
+			<path d="M0 595.28 C27.21 595.98 44.74 586.66 54.23 576.91 C59.38 571.63 62.16 566.23 63.37 560.79 L63.41 560.43"
+					class="st10"/>
+		</g>
+		<g id="shape163-330" v:mID="163" v:groupContext="shape" v:layerMember="0" transform="translate(471.099,-128.551)">
+			<title>动态连接线.134</title>
+			<path d="M-6.93 595.28 C-6.96 599.65 -7.26 609.84 -7.25 615.91 C-7.25 616.61 -7.24 617.25 -7.23 617.84 L-7.23 618.2"
+					class="st10"/>
+		</g>
+		<g id="shape164-335" v:mID="164" v:groupContext="shape" v:layerMember="0" transform="translate(457.276,-89.2441)">
+			<title>动态连接线.135</title>
+			<path d="M7.09 595.28 C7.14 595.39 6.87 604.68 6.86 610.54 C6.86 611.94 6.87 613.15 6.89 614.2 L6.9 614.56"
+					class="st10"/>
+		</g>
+		<g id="shape165-340" v:mID="165" v:groupContext="shape" v:layerMember="0" transform="translate(414.283,-63.5433)">
+			<title>动态连接线.137</title>
+			<path d="M7.09 595.28 C7.09 590.55 7.09 582.47 7.09 575.81" class="st12"/>
+		</g>
+		<g id="shape166-346" v:mID="166" v:groupContext="shape" v:layerMember="0" transform="translate(414.098,-98.3318)">
+			<title>动态连接线.138</title>
+			<path d="M7.04 595.28 C7.04 588.66 7.04 577.99 7.05 571.54 L7.06 571.18" class="st10"/>
+		</g>
+		<g id="shape167-351" v:mID="167" v:groupContext="shape" v:layerMember="0" transform="translate(404.419,-128.976)">
+			<title>动态连接线.140</title>
+			<path d="M0 595.28 C-1.05 615.05 -11.44 635.79 -24.35 648.92 C-35.02 659.76 -47.4 665.41 -61.34 666.79 L-61.7 666.81"
+					class="st10"/>
+		</g>
+		<g id="shape168-356" v:mID="168" v:groupContext="shape" v:layerMember="0" transform="translate(241.959,-141.89)">
+			<title>动态连接线.143</title>
+			<path d="M0 602.2 C0 602.28 -0 602.38 4.66 602.44 C9.37 602.5 18.82 602.52 26.81 602.52 L27.17 602.52" class="st10"/>
+		</g>
+		<g id="shape169-361" v:mID="169" v:groupContext="shape" v:layerMember="0" transform="translate(347.102,-141.236)">
+			<title>动态连接线.144</title>
+			<path d="M0 602.29 C11.26 602.29 30.34 602.29 39.17 602.32 L39.53 602.33" class="st10"/>
+		</g>
+		<g id="shape170-366" v:mID="170" v:groupContext="shape" v:layerMember="0" transform="translate(241.88,-146.509)">
+			<title>动态连接线.146</title>
+			<path d="M0 588.23 C0 588.21 -0 588.18 4.77 588.17 C9.62 588.15 19.39 588.15 27.6 588.15 L27.96 588.15" class="st10"/>
+		</g>
+		<g id="shape171-371" v:mID="171" v:groupContext="shape" v:layerMember="0" transform="translate(349.654,-143.334)">
+			<title>动态连接线.147</title>
+			<path d="M0 588.37 C10.06 588.37 26.95 588.37 35.26 588.3 L35.62 588.28" class="st10"/>
+		</g>
+		<g id="shape172-376" v:mID="172" v:groupContext="shape" v:layerMember="0" transform="translate(252.85,-250.299)">
+			<title>动态连接线.152</title>
+			<path d="M0 595.28 C11.76 606.47 35.88 605.43 49.05 606.26 C57.8 606.82 61.72 608.2 65.54 612.26 L65.76 612.55"
+					class="st10"/>
+		</g>
+		<g id="shape173-381" v:mID="173" v:groupContext="shape" transform="translate(542.126,-25.3701)">
+			<title>工作表.173</title>
+			<desc>NOTE 1: If the sensor related to this position feedback inter...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="124.866" cy="576" width="249.74" height="38.5512"/>
+			<rect x="0" y="556.724" width="249.732" height="38.5512" class="st6"/>
+			<text x="0.667em 1.389em 2.111em 2.722em" y="568.2" class="st7" v:langID="1033"><v:paragraph v:horizAlign="3"
+						v:bulletSize="0.166667"/><v:tabList/>NOTE<tspan x="3.372em" dy="0em" class="st8" v:langID="2052"> </tspan><tspan
+						x="3.661em 4.2em" dy="0em" class="st8" v:langID="2052">1:</tspan><tspan x="4.518em" dy="0em" class="st8"> </tspan><tspan
+						x="4.807em 5.14em 5.473em 5.762em 6.04em 6.54em 6.984em 7.273em 7.662em 8.106em 8.606em 8.995em 9.495em 9.828em
+							 10.117em 10.45em 10.894em 11.172em 11.616em 11.894em 12.338em 12.838em 13.127em 13.405em 13.905em 14.194em
+							 14.472em 14.972em 15.25em 15.639em 15.928em 16.428em 16.928em 17.317em 17.595em 17.873em 18.151em 18.651em
+							 19.151em 19.44em 19.773em 20.217em 20.66em 21.16em 21.661em 22.104em 22.548em 23.048em 23.337em 23.615em
+							 24.115em 24.393em 24.837em 25.17em 25.503em 25.947em 26.391em 26.835em 27.124em 27.402em 27.791em 28.08em
+							 28.358em 28.858em 29.302em 29.591em 30.369em 30.869em 31.146em 31.646em 31.979em 32.269em 33.047em 33.49em
+							 33.934em 34.323em 34.823em 35.156em 35.6em 36.378em 36.822em 37.322em" dy="0em" class="st8">If the sensor related to this position feedback interface is the motor measurement</tspan><tspan
+						x="37.639em" dy="0em" class="st8" v:langID="2052"> </tspan><tspan x="37.928em 38.317em 38.817em 39.207em
+							 39.484em 39.928em 40.706em 40.956em" dy="0em" class="st8">system, </tspan><tspan x="0.667em 0.945em
+							 1.445em 1.888em 2.29em 2.734em 3.234em 3.734em 4.234em 4.512em 4.79em 5.068em 5.568em 6.068em 6.47em
+							 7.192em 7.692em 8.192em 8.748em 9.359em 10.303em 10.705em 11.205em 11.483em 11.761em 12.163em 12.663em
+							 13.163em 13.565em 14.129em 14.629em 15.031em 15.475em 15.919em 16.419em 16.821em 17.265em 17.542em 17.82em
+							 18.264em 18.597em 19.097em 19.541em 19.819em 20.097em 20.597em 21.041em 21.318em 21.818em 22.22em 22.553em
+							 22.997em 23.386em 23.886em 24.164em 24.442em 24.844em 25.122em 25.622em 26.024em 26.468em 26.87em 27.259em
+							 27.703em 28.203em 28.592em 29.092em 29.425em 29.827em 30.105em 30.605em 30.883em 31.327em 31.66em 31.993em
+							 32.437em 32.88em" dy="1.2em" class="st8">the condition Gx_STW bit 14 =1 can alternatively result in a sensor interface</tspan><tspan
+						x="33.476em" dy="0em" class="st8" v:langID="2052"> </tspan><tspan x="33.878em 34.322em 34.655em 34.988em
+							 35.488em 35.821em 36.223em 36.556em 37.167em 37.5em 37.833em 38.333em 38.666em 39.068em 39.512em 40.012em
+							 40.512em 40.956em" dy="0em" class="st8">error (Error code </tspan><tspan x="0.667em 1.167em 1.667em
+							 2.167em 2.667em 3.167em 3.667em 3.917em 4.167em 4.556em 5em 5.444em 5.694em 6.305em 6.748em 7.248em
+							 7.526em 7.97em 8.22em 8.72em 9.22em 9.72em 10.053em 10.303em 11.025em 11.525em 11.969em 12.469em 12.719em
+							 12.997em 13.497em 13.941em 14.191em 14.691em 15.024em 15.302em 15.802em 16.246em 16.496em 16.773em 17.163em
+							 17.413em 17.746em 18.246em 18.746em 19.246em 19.524em 20.024em 20.524em 20.774em 21.217em 21.717em 22.217em
+							 22.467em 22.967em 23.467em 23.717em 23.995em 24.328em 24.772em 25.272em 25.661em 25.939em 26.217em 26.495em
+							 26.995em 27.495em 27.745em 28.023em" dy="1.8em" class="st8">0x0003, see Table 107) when the drive is running and no transition to</tspan><tspan
+						x="28.523em" dy="0em" class="st8" v:langID="2052"> </tspan><tspan x="28.773em 29.329em 30.051em 30.551em
+							 31.051em 31.301em 32.023em 32.301em 32.579em 32.857em 33.107em 33.607em 34.051em 34.301em 34.801em 35.244em
+							 35.577em 35.91em 36.41em 36.744em 37.521em 37.965em 38.465em" dy="0em" class="st8">SD12 will be performed.</tspan></text>		</g>
+		<g id="shape174-396" v:mID="174" v:groupContext="shape" v:layerMember="0" transform="translate(100.843,-314.079)">
+			<title>动态连接线</title>
+			<path d="M-7.02 595.28 C-7.02 589.58 -7.02 580.52 -7.04 574.68 L-7.04 574.32" class="st10"/>
+		</g>
+		<g id="shape175-401" v:mID="175" v:groupContext="shape" v:layerMember="0" transform="translate(86.4567,-366.661)">
+			<title>动态连接线.158</title>
+			<path d="M6.8 595.28 L7.3 548.03" class="st12"/>
+		</g>
+		<g id="shape176-406" v:mID="176" v:groupContext="shape" v:layerMember="0" transform="translate(107.518,-420.86)">
+			<title>动态连接线.163</title>
+			<path d="M0 595.28 C-2.44 628.78 64.83 629.83 94.26 633.82 C121.29 637.47 116.41 643.6 117.2 663.99 L117.23 664.35"
+					class="st10"/>
+		</g>
+		<g id="shape177-411" v:mID="177" v:groupContext="shape" v:layerMember="0" transform="translate(711.218,-313.512)">
+			<title>动态连接线.165</title>
+			<path d="M6.95 595.28 C6.95 592.53 6.95 588.51 6.97 585.16 L6.98 584.8" class="st10"/>
+		</g>
+		<g id="shape178-416" v:mID="178" v:groupContext="shape" v:layerMember="0" transform="translate(711.638,-342.189)">
+			<title>动态连接线.166</title>
+			<path d="M7.09 595.28 C7.09 588.54 7.09 576.59 7.09 567.5" class="st12"/>
+		</g>
+		<g id="shape179-421" v:mID="179" v:groupContext="shape" v:layerMember="0" transform="translate(656.22,-388.465)">
+			<title>动态连接线.168</title>
+			<path d="M0 602.06 C-19.48 602.06 -52.88 602.06 -67.19 602.21 C-68.61 602.22 -69.83 602.24 -70.9 602.25 L-71.26 602.28"
+					class="st10"/>
+		</g>
+		<g id="shape180-426" v:mID="180" v:groupContext="shape" v:layerMember="0" transform="translate(460.866,-388.28)">
+			<title>动态连接线.169</title>
+			<path d="M0 602.34 C-11.42 602.34 -30.8 602.34 -39.68 602.35 L-40.04 602.35" class="st10"/>
+		</g>
+		<g id="shape181-431" v:mID="181" v:groupContext="shape" v:layerMember="0" transform="translate(653.102,-394.683)">
+			<title>动态连接线.172</title>
+			<path d="M-10.2 588.54 L-10.56 588.54 C-26.9 588.54 -47.54 588.51 -57.46 588.37 C-66.64 588.24 -66.64 588.01 -66.64 587.83"
+					class="st13"/>
+		</g>
+		<g id="shape182-437" v:mID="182" v:groupContext="shape" v:layerMember="0" transform="translate(454.925,-408.13)">
+			<title>动态连接线.173</title>
+			<path d="M-10.2 601.94 L-10.56 601.93 C-17.49 602.02 -27.64 602.34 -39.79 602.59" class="st13"/>
+		</g>
+		<g id="shape183-442" v:mID="183" v:groupContext="shape" v:layerMember="0" transform="translate(250.951,-437.741)">
+			<title>动态连接线.175</title>
+			<path d="M0 588.19 C-0 588.19 0 588.19 -3.02 588.19 C-5.6 588.18 -10.36 588.18 -14.9 588.18 L-15.26 588.18"
+					class="st10"/>
+		</g>
+		<g id="shape184-447" v:mID="184" v:groupContext="shape" v:layerMember="0" transform="translate(139.228,-455.9)">
+			<title>动态连接线.176</title>
+			<path d="M0 602.31 C0 602.34 -0 602.37 -2.3 602.39 C-3.95 602.4 -6.77 602.41 -9.68 602.41 L-10.04 602.41" class="st10"/>
+		</g>
+		<g id="shape185-452" v:mID="185" v:groupContext="shape" v:layerMember="0" transform="translate(684.638,-411.378)">
+			<title>动态连接线.178</title>
+			<path d="M-7.02 595.06 C-7.02 593.23 -7.02 590.7 -7.02 588.35 L-7.03 587.99" class="st10"/>
+		</g>
+		<g id="shape186-457" v:mID="186" v:groupContext="shape" v:layerMember="0" transform="translate(684.787,-433.063)">
+			<title>动态连接线.179</title>
+			<path d="M-7.02 595.06 C-7.02 593.23 -7.02 590.7 -7.02 588.35 L-7.03 587.99" class="st10"/>
+		</g>
+		<g id="shape187-462" v:mID="187" v:groupContext="shape" v:layerMember="0" transform="translate(741.614,-448.512)">
+			<title>动态连接线.181</title>
+			<path d="M7.02 596.76 C7.02 597.92 7.02 599.42 7.02 600.92 L7.03 601.28" class="st10"/>
+		</g>
+		<g id="shape188-467" v:mID="188" v:groupContext="shape" v:layerMember="0" transform="translate(756.146,-423.898)">
+			<title>动态连接线.182</title>
+			<path d="M-7.03 596.39 C-7.03 597.74 -7.03 599.54 -7.04 601.3 L-7.04 601.66" class="st10"/>
+		</g>
+		<g id="shape189-472" v:mID="189" v:groupContext="shape" v:layerMember="0" transform="translate(486.142,-464.3)">
+			<title>动态连接线.184</title>
+			<path d="M-10.18 602.67 L-10.54 602.69 C-15.77 602.9 -18.16 602.77 -22.05 602.79 C-28.28 602.8 -38.37 603.16 -54.8 602.66"
+					class="st13"/>
+		</g>
+		<g id="shape190-477" v:mID="190" v:groupContext="shape" v:layerMember="0" transform="translate(654.661,-464.528)">
+			<title>动态连接线.185</title>
+			<path d="M-10.2 602.23 L-10.56 602.24 C-34.2 602.39 -37.69 602.11 -45.75 602.24 C-50.92 602.33 -57.97 602.57 -66.18 602.57"
+					class="st13"/>
+		</g>
+		<g id="shape191-482" v:mID="191" v:groupContext="shape" v:layerMember="0" transform="translate(654.803,-490.465)">
+			<title>动态连接线.188</title>
+			<path d="M0 601.72 C-15.58 601.72 -41.86 602.44 -53.37 602.62 C-54.87 602.65 -56.12 602.66 -57.17 602.67 L-57.53 602.69"
+					class="st10"/>
+		</g>
+		<g id="shape192-487" v:mID="192" v:groupContext="shape" v:layerMember="0" transform="translate(477.213,-490.003)">
+			<title>动态连接线.189</title>
+			<path d="M0 602.11 C-10.77 602.11 -28.97 602.11 -37.58 602.22 L-37.94 602.24" class="st10"/>
+		</g>
+		<g id="shape193-492" v:mID="193" v:groupContext="shape" v:layerMember="0" transform="translate(377.504,-449.598)">
+			<title>动态连接线.191</title>
+			<path d="M7.02 596.76 C7.02 597.92 7.02 599.42 7.02 600.92 L7.03 601.28" class="st10"/>
+		</g>
+		<g id="shape194-497" v:mID="194" v:groupContext="shape" v:layerMember="0" transform="translate(377.693,-424.465)">
+			<title>动态连接线.192</title>
+			<path d="M7.02 596.76 C7.02 597.92 7.02 599.42 7.02 600.92 L7.03 601.28" class="st10"/>
+		</g>
+		<g id="shape195-502" v:mID="195" v:groupContext="shape" v:layerMember="0" transform="translate(303.125,-410.574)">
+			<title>动态连接线.194</title>
+			<path d="M-7.07 594.45 C-7.07 592.94 -7.07 590.92 -7.07 588.97 L-7.07 588.61" class="st10"/>
+		</g>
+		<g id="shape196-507" v:mID="196" v:groupContext="shape" v:layerMember="0" transform="translate(303.029,-435.839)">
+			<title>动态连接线.195</title>
+			<path d="M-6.96 593.82 C-6.96 592.65 -6.96 591.12 -6.97 589.59 L-6.98 589.23" class="st10"/>
+		</g>
+		<g id="shape197-512" v:mID="197" v:groupContext="shape" v:layerMember="0" transform="translate(91.8425,-472.394)">
+			<title>动态连接线.197</title>
+			<path d="M0 595.28 C-0.99 560.98 17.83 548.22 47.75 540.21 C83.89 530.52 136.24 527.77 187.28 529.28 L187.64 529.29"
+					class="st10"/>
+		</g>
+		<g id="shape198-517" v:mID="198" v:groupContext="shape" v:layerMember="0" transform="translate(491.102,-539.291)">
+			<title>动态连接线.198</title>
+			<path d="M0 595.28 C55.98 595.28 150.67 595.05 192.34 603.43 C219.15 608.82 224.01 617.76 224.85 629.4 L224.86 629.76"
+					class="st10"/>
+		</g>
+		<g id="shape199-522" v:mID="199" v:groupContext="shape" v:layerMember="0" transform="translate(85.6198,-123.344)">
+			<title>动态连接线.199</title>
+			<path d="M6.99 595.28 C6.99 603.32 6.99 616.55 7.03 623.86 L7.03 624.22" class="st10"/>
+		</g>
+		<g id="shape200-527" v:mID="200" v:groupContext="shape" v:layerMember="0" transform="translate(159.769,-89.7064)">
+			<title>动态连接线.200</title>
+			<path d="M7.02 595.28 L7.13 567.92" class="st12"/>
+		</g>
+		<g id="shape201-532" v:mID="201" v:groupContext="shape" v:layerMember="0" transform="translate(194.693,-165.78)">
+			<title>动态连接线.201</title>
+			<path d="M7.09 595.28 C7.09 590.18 7.09 581.38 7.09 574.25" class="st12"/>
+		</g>
+		<g id="shape202-537" v:mID="202" v:groupContext="shape" v:layerMember="0" transform="translate(194.561,-223.82)">
+			<title>动态连接线.202</title>
+			<path d="M7.09 595.28 C7.09 591.74 7.09 585.9 7.09 580.77" class="st12"/>
+		</g>
+		<g id="shape203-542" v:mID="203" v:groupContext="shape" v:layerMember="0" transform="translate(482.457,-128.835)">
+			<title>动态连接线.203</title>
+			<path d="M0 595.28 C0 607.18 -0 623.6 14.48 632.47 C29.86 641.88 61.55 642.8 84.38 642.89 L84.74 642.89" class="st10"/>
+		</g>
+		<g id="shape204-547" v:mID="204" v:groupContext="shape" v:layerMember="0" transform="translate(481.961,-251.008)">
+			<title>动态连接线.204</title>
+			<path d="M-6.73 595.28 C-6.73 617.44 -6.73 655.44 -6.91 671.73 C-6.93 673.79 -6.95 675.5 -6.98 676.92 L-7 677.28"
+					class="st10"/>
+		</g>
+		<g id="shape205-552" v:mID="205" v:groupContext="shape" v:layerMember="0" transform="translate(83.933,-245.339)">
+			<title>动态连接线.205</title>
+			<path d="M7.01 595.28 C7.01 598.96 7.01 604.54 7.03 608.79 L7.03 609.15" class="st10"/>
+		</g>
+		<g id="shape206-557" v:mID="206" v:groupContext="shape" v:layerMember="0" transform="translate(84.6765,-192.269)">
+			<title>动态连接线.214</title>
+			<path d="M7.04 595.28 C7.04 600.81 7.04 609.58 7.05 615.31 L7.05 615.67" class="st10"/>
+		</g>
+		<g id="shape207-562" v:mID="207" v:groupContext="shape" v:layerMember="0" transform="translate(243.638,-293.386)">
+			<title>动态连接线.216</title>
+			<path d="M0 597.97 C26.08 590.31 65.98 584.25 78.83 589.85 C83.95 592.08 84.78 596.16 84.88 599.79 L84.94 600.14"
+					class="st10"/>
+		</g>
+		<g id="shape208-567" v:mID="208" v:groupContext="shape" v:layerMember="0" transform="translate(329.528,-265.89)">
+			<title>动态连接线.217</title>
+			<path d="M0 601.94 C2.27 618.8 -31.35 613.28 -47.47 609.92 C-62.61 606.76 -62.34 605.5 -66.25 604.24 L-66.6 604.17"
+					class="st10"/>
+		</g>
+		<g id="shape209-572" v:mID="209" v:groupContext="shape" v:layerMember="0" transform="translate(330.718,-330.661)">
+			<title>动态连接线.218</title>
+			<path d="M0 595.28 C49.83 593.29 85.93 621.81 103.82 652.75 C121.67 683.64 121.37 716.93 121.16 756.47 L121.15 756.83"
+					class="st10"/>
+		</g>
+		<g id="shape210-577" v:mID="210" v:groupContext="shape" v:layerMember="0" transform="translate(404.079,-161.887)">
+			<title>动态连接线.219</title>
+			<path d="M0 595.28 C0.99 578.44 -14.68 576.05 -25.94 574.12 C-34.81 572.6 -40.94 571.38 -47.1 571.08 L-47.46 571.09"
+					class="st10"/>
+		</g>
+		<g id="shape211-582" v:mID="211" v:groupContext="shape" v:layerMember="0" transform="translate(256.677,-185.811)">
+			<title>动态连接线.220</title>
+			<path d="M0 595.28 C-12.47 594.99 -5.94 579.42 -7.98 569.19 C-10.03 558.9 -20.75 554.02 -22.87 543.21 L-22.88 542.85"
+					class="st10"/>
+		</g>
+		<g id="shape212-587" v:mID="212" v:groupContext="shape" v:layerMember="0" transform="translate(226.488,-55.7008)">
+			<title>动态连接线.223</title>
+			<path d="M0 595.28 C-20.83 596.41 -24.73 588.51 -26.91 581.22 C-30 570.93 -29.69 561.86 -29.36 534.14 L-29.36 533.78"
+					class="st10"/>
+		</g>
+		<g id="shape213-592" v:mID="213" v:groupContext="shape" v:layerMember="0" transform="translate(432.9,-204.224)">
+			<title>动态连接线.225</title>
+			<path d="M-6.94 595.28 C-6.94 605.44 -6.94 622.54 -7.01 630.9 L-7.02 631.26" class="st10"/>
+		</g>
+		<g id="shape214-597" v:mID="214" v:groupContext="shape" transform="translate(1.55905,-553.748)">
+			<title>工作表.214</title>
+			<desc>State diagram of the position feedback interfacewith designat...</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="420.165" cy="586.063" width="840.34" height="18.4252"/>
+			<rect x="0" y="576.85" width="840.331" height="18.4252" class="st6"/>
+			<text x="141.34" y="591.46" class="st14" v:langID="1033"><v:paragraph v:horizAlign="1" v:bulletSize="0.166667"/><v:tabList/>State diagram of the position feedback interfacewith designations of the states and transitions</text>		</g>
+	</g>
+</svg>

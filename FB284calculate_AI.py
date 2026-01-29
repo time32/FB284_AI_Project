@@ -601,8 +601,8 @@ class FB284Calculator(tk.Tk):
         self.create_output_row_grid(res_col1, 0, '🚀 设定电机转速:', self.res_motor_spd, 'RPM')
         self.create_output_row_grid_dynamic_unit(res_col1, 1, '🚀 设定负载转速:', self.res_real_spd, self.res_real_spd_unit)
         self.create_output_row_grid(res_col1, 2, '🚀 额定电机转速:', self.res_vel_max, '1000LU/min')
-        self.create_output_row_grid(res_col1, 3, '📊 实际电机转速:', self.res_act_vel, 'RPM')
-        self.create_output_row_grid_dynamic_unit(res_col1, 4, '📊 实际负载转速:', self.res_act_load_vel, self.res_real_spd_unit)
+        self.create_output_row_grid(res_col1, 3, '🚀 实际电机转速:', self.res_act_vel, 'RPM')
+        self.create_output_row_grid_dynamic_unit(res_col1, 4, '🚀 实际负载转速:', self.res_act_load_vel, self.res_real_spd_unit)
         # -------------------------------------------------
         
         ttk.Separator(panel, orient='vertical').grid(row=0, column=1, sticky='ns', padx=20)
