@@ -51,7 +51,7 @@ def set_window_icon(target_obj):
 try:
     myappid = 'mycompany.oscilloscope.pro.final_v26_XY_measure'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-except ImportError:
+except Exception:
     pass
 
 # === 全局配置 ===
