@@ -5,7 +5,6 @@ import numpy as np
 import pyqtgraph as pg
 import ctypes 
 import time
-import win32com.client as win32
 from io import StringIO
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QPushButton, QLabel, QFileDialog, 
@@ -52,7 +51,7 @@ def set_window_icon(target_obj):
 try:
     myappid = 'mycompany.oscilloscope.pro.final_v26_XY_measure'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-except ImportError:
+except Exception:
     pass
 
 # === 全局配置 ===
@@ -61,6 +60,7 @@ pg.setConfigOption('background', '#000000')
 pg.setConfigOption('foreground', '#DCDFE4') 
 
 WAVE_COLORS = ['#98C379', '#E06C75', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#D19A66', '#ABB2BF']
+MAX_RENDER_POINTS = 200000
 
 # === 新增：智能坐标轴 (支持 Hex 显示) ===
 class SmartAxisItem(pg.AxisItem):
@@ -549,8 +549,11 @@ class ProOscilloscope(QMainWindow):
         self.overlay_views = [] 
         self.all_views = []     
         self.trace_dict = {}
-        self.col_formats = {} 
-        self.hidden_cols = set() 
+        self.col_formats = {}
+        self.hidden_cols = set()
+        self.df_values = None
+        self.col_index_map = {}
+        self.visible_cols_cache = []
 
         self.v_line = None
         self.h_line = None
@@ -723,9 +726,19 @@ class ProOscilloscope(QMainWindow):
             if need_refresh:
                 self.recalc_time() 
 
+    def rebuild_column_cache(self):
+        if self.df is None:
+            self.col_index_map = {}
+            self.visible_cols_cache = []
+            return
+        self.col_index_map = {name: i for i, name in enumerate(self.df.columns)}
+        self.visible_cols_cache = [
+            c for c in self.df.columns if self.trace_dict.get(c, {}).get('visible', False)
+        ]
+
     def format_val(self, col_name, val):
         if np.isnan(val): return "NaN"
-        fmt = self.col_formats.get(col_name, 'dec') 
+        fmt = self.col_formats.get(col_name, 'dec')
         if fmt == 'hex':
             try:
                 int_val = int(val)
@@ -757,7 +770,7 @@ class ProOscilloscope(QMainWindow):
         """)
 
     def update_stats_table(self):
-        if self.df is None or self.main_vb is None: return
+        if self.df is None or self.df_values is None or self.main_vb is None: return
         try:
             x_min_view, x_max_view = self.main_vb.viewRange()[0]
         except: return
@@ -775,12 +788,13 @@ class ProOscilloscope(QMainWindow):
             y1_raw = self.cursor_y1.value()
             y2_raw = self.cursor_y2.value()
 
-        visible_cols = [c for c in self.df.columns if self.trace_dict.get(c, {}).get('visible', False)]
+        visible_cols = self.visible_cols_cache
         self.stats_table.setRowCount(len(visible_cols))
-        
+
         for row_idx, col_name in enumerate(visible_cols):
-            if idx_start < idx_end:
-                d = self.df[col_name].values[idx_start:idx_end]
+            col_idx = self.col_index_map.get(col_name)
+            if idx_start < idx_end and col_idx is not None:
+                d = self.df_values[idx_start:idx_end, col_idx]
                 if len(d) > 0:
                     y_min, y_max, y_mean = np.nanmin(d), np.nanmax(d), np.nanmean(d)
                     y_vpp = y_max - y_min
@@ -810,7 +824,7 @@ class ProOscilloscope(QMainWindow):
                 
                 diff_y = val_at_y2 - val_at_y1
 
-            c_idx = list(self.df.columns).index(col_name)
+            c_idx = self.col_index_map.get(col_name, 0)
             color = QColor(WAVE_COLORS[c_idx % len(WAVE_COLORS)])
             
             item_nm = QTableWidgetItem(f"■ {col_name}")
@@ -891,6 +905,7 @@ class ProOscilloscope(QMainWindow):
                         item.setVisible(is_visible)
                     except RuntimeError:
                         pass
+        self.rebuild_column_cache()
         self.update_stats_table()
 
     def apply_stylesheet(self):
@@ -1031,14 +1046,20 @@ class ProOscilloscope(QMainWindow):
         try:
             rate = self.spin_rate.value()
             self.time_axis = np.arange(len(self.df), dtype=np.float32) * rate
+            self.df_values = self.df.to_numpy(dtype=np.float32, copy=False)
+            self.rebuild_column_cache()
+            if self.dot_worker and self.dot_worker.isRunning():
+                self.dot_worker.terminate()
+                self.dot_worker.wait()
+            self.dots_cache = None
+            self.chk_dots.blockSignals(True)
+            self.chk_dots.setChecked(False)
+            self.chk_dots.blockSignals(False)
+            self.chk_dots.setEnabled(True)
             self.update_plot()
             self.btn_load.setEnabled(True)
-            self.chk_dots.setEnabled(False)
-            if self.dot_worker and self.dot_worker.isRunning(): self.dot_worker.terminate(); self.dot_worker.wait()
-            self.dot_worker = DotPreparerThread(self.df, self.time_axis)
-            self.dot_worker.finished_signal.connect(self.on_dots_prepared)
-            self.dot_worker.start()
-            self.loading_overlay.start("正在后台优化数据点...")
+            self.status_label.setText(f" 就绪 | {len(self.df)} 行")
+            self.loading_overlay.stop()
         except Exception as e:
             self.loading_overlay.stop()
             QMessageBox.critical(self, "计算错误", str(e))
@@ -1048,6 +1069,8 @@ class ProOscilloscope(QMainWindow):
         self.chk_dots.setEnabled(True)
         self.status_label.setText(f" 就绪 | {len(self.df)} 行")
         self.loading_overlay.stop()
+        if self.chk_dots.isChecked():
+            self.update_plot_wrapper()
 
     def cleanup_plot(self):
         if self.proxy: 
@@ -1059,6 +1082,8 @@ class ProOscilloscope(QMainWindow):
         for v in self.overlay_views: 
             if v.scene(): v.scene().removeItem(v)
         self.overlay_views.clear(); self.all_views.clear(); self.trace_dict.clear()
+        self.visible_cols_cache = []
+        self.col_index_map = {}
         self.plot_layout.clear(); self.stats_table.clearContents(); self.stats_table.setRowCount(0)
         while self.legend_layout.count():
             item = self.legend_layout.takeAt(0)
@@ -1088,6 +1113,17 @@ class ProOscilloscope(QMainWindow):
             new_max = current_y[0] + span * rel_max
             view.setYRange(new_min, new_max, padding=0)
 
+    def get_render_series(self, col_name):
+        idx = self.col_index_map.get(col_name)
+        if idx is None:
+            y = self.df[col_name].values
+        else:
+            y = self.df_values[:, idx]
+        if len(self.time_axis) <= MAX_RENDER_POINTS:
+            return self.time_axis, y
+        step = max(1, len(self.time_axis) // MAX_RENDER_POINTS)
+        return self.time_axis[::step], y[::step]
+
     def create_view_box(self):
         vb = CustomViewBox()
         vb.sigDragEvent.connect(self.on_view_dragged)
@@ -1099,8 +1135,22 @@ class ProOscilloscope(QMainWindow):
         return vb
 
     def update_plot_wrapper(self):
+        if self.chk_dots.isChecked() and self.dots_cache is None:
+            self.prepare_dots_cache()
+            return
         self.loading_overlay.start("正在刷新视图...")
         QTimer.singleShot(20, self.update_plot)
+
+    def prepare_dots_cache(self):
+        if self.df is None or self.time_axis is None:
+            return
+        if self.dot_worker and self.dot_worker.isRunning():
+            return
+        self.chk_dots.setEnabled(False)
+        self.loading_overlay.start("正在后台优化数据点...")
+        self.dot_worker = DotPreparerThread(self.df, self.time_axis)
+        self.dot_worker.finished_signal.connect(self.on_dots_prepared)
+        self.dot_worker.start()
 
     def update_plot(self):
         try:
@@ -1114,8 +1164,8 @@ class ProOscilloscope(QMainWindow):
             self.all_views.append(self.main_vb)
             
             def draw(target_plot, col, color, visible=True):
-                QApplication.processEvents()
-                curve = pg.PlotCurveItem(x=self.time_axis, y=self.df[col].values, pen=pg.mkPen(color, width=1), connect='finite')
+                x_data, y_data = self.get_render_series(col)
+                curve = pg.PlotCurveItem(x=x_data, y=y_data, pen=pg.mkPen(color, width=1), connect='finite')
                 if hasattr(curve, 'setDownsampling'): curve.setDownsampling(auto=True, method='peak')
                 if hasattr(curve, 'setClipToView'): curve.setClipToView(True)
                 
@@ -1175,6 +1225,7 @@ class ProOscilloscope(QMainWindow):
                     
                 self.update_views_geometry()
             
+            self.rebuild_column_cache()
             if self.chk_crosshair.isChecked(): self.setup_crosshair()
             if self.chk_measure.isChecked(): self.setup_cursors()
             self.update_stats_table()
@@ -1211,7 +1262,7 @@ class ProOscilloscope(QMainWindow):
         self.v_line = None; self.h_line = None; self.crosshair_label = None
 
     def on_mouse_move(self, evt):
-        if self.df is None or not self.crosshair_label: return
+        if self.df is None or self.df_values is None or not self.crosshair_label: return
         if not self.chk_crosshair.isChecked(): return
         try:
             pos = evt[0]
@@ -1226,11 +1277,14 @@ class ProOscilloscope(QMainWindow):
                 if self.v_line: self.v_line.setPos(final_x)
                 if self.h_line: self.h_line.setPos(final_y)
                 info = f"<span style='color: #ABB2BF'>Time: {final_x:.1f} ms</span><br>"
-                for i, col in enumerate(self.df.columns):
-                    if not self.trace_dict[col]['visible']: continue
-                    c = WAVE_COLORS[i % len(WAVE_COLORS)]
-                    v = self.df.iloc[idx, i]
-                    val_str = self.format_val(col, v) 
+                row_vals = self.df_values[idx]
+                for col in self.visible_cols_cache:
+                    col_idx = self.col_index_map.get(col)
+                    if col_idx is None:
+                        continue
+                    c = WAVE_COLORS[col_idx % len(WAVE_COLORS)]
+                    v = row_vals[col_idx]
+                    val_str = self.format_val(col, v)
                     info += f'<span style="color:{c}">■ {col}: {val_str}</span><br>'
                 self.crosshair_label.setHtml(f'<div style="font-family: Consolas, sans-serif; font-size:12px">{info}</div>')
                 self.crosshair_label.setPos(final_x, final_y)
